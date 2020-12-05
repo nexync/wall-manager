@@ -1,11 +1,17 @@
 import React from 'react'
 import {Card} from 'antd';
 
-export const Route = () => {
+export const Route = ({route}) => {
    let color;
-   switch (colorChoice) {
+   switch (route.color) {
       case "green":
-         color = "#2ecc71"
+         color = "#008000"
+         break
+      case "red":
+         color = "#FF0000"
+         break
+      default:
+         color = "#FFFFFF"
    }
    const gridStyle = {
       padding: "0px",
@@ -14,10 +20,10 @@ export const Route = () => {
       verticalAlign: "middle"
    }
    return (
-      <Card size = "small" extra = "Grade" title = "Route Name" hoverable bodyStyle = {{height: "10%"}} headStyle = {{fontSize: "16px",borderRight: `5px solid ${color}` }} style = {{width: 300,}}>
-            <Card.Grid hoverable = {false} style = {gridStyle}>Setter</Card.Grid>
-            <Card.Grid hoverable = {false} style = {gridStyle}>Date</Card.Grid>
-            <Card.Grid hoverable = {false} style = {gridStyle}>Wall</Card.Grid>
+      <Card size = "small" extra = {route.grade} title = {route.name} hoverable bodyStyle = {{height: "10%"}} headStyle = {{fontSize: "16px",borderRight: `5px solid ${color}` }} style = {{width: 500}}>
+            <Card.Grid hoverable = {false} style = {gridStyle}>{route.setter}</Card.Grid>
+            <Card.Grid hoverable = {false} style = {gridStyle}>{route.date}</Card.Grid>
+            <Card.Grid hoverable = {false} style = {gridStyle}>Wall {route.wall}</Card.Grid>
       </Card>
    )
 }
