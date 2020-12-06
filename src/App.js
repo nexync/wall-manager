@@ -1,18 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-import {Header} from './components/Header'
-import {RouteList} from './components/RouteList'
+import {Header} from './components/Header';
+import {RouteList} from './components/RouteList';
 
-import {GlobalProvider} from './context/GlobalState'
+import {GlobalProvider} from './context/GlobalState';
 
 import './App.css';
+
 function App() {
-  return (
+   return ( 
    <GlobalProvider>
       <Header/>
-      <RouteList/>
+      <div className = "container">
+         <RouteList/>
+      </div>
    </GlobalProvider>
-  );
+   );
 }
 
 export default App;

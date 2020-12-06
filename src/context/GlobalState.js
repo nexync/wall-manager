@@ -4,8 +4,8 @@ import AppReducer from './AppReducer'
 //Initial State
 const initialState = {
    routes: [
-      { id: 1, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: '0'},
-      { id: 2, name: 'Satanic Rituals', setter: 'Kook', grade: 12, color: 'red', wall: '7'}
+      { id: 1, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: '0', date: new Date().getMonth() + '/' + new Date().getDate()},
+      { id: 2, name: 'Satanic Rituals', setter: 'Kook', grade: 12, color: 'red', wall: '7',date: new Date().getMonth() + '/' + new Date().getDate()}
    ]
 }
 

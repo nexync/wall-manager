@@ -20,7 +20,7 @@ export const Route = ({route}) => {
       verticalAlign: "middle"
    }
    return (
-      <Card size = "small" extra = {route.grade} title = {route.name} hoverable bodyStyle = {{height: "10%"}} headStyle = {{fontSize: "16px",borderRight: `5px solid ${color}` }} style = {{width: 500}}>
+      <Card size = "small" extra = {`5.${route.grade}`} title = {route.name} hoverable bodyStyle = {{height: "10%"}} headStyle = {{fontSize: "16px",borderRight: `5px solid ${color}` }} style = {{width: 500}}>
             <Card.Grid hoverable = {false} style = {gridStyle}>{route.setter}</Card.Grid>
             <Card.Grid hoverable = {false} style = {gridStyle}>{route.date}</Card.Grid>
             <Card.Grid hoverable = {false} style = {gridStyle}>Wall {route.wall}</Card.Grid>
