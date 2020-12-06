@@ -1,6 +1,6 @@
 import React from 'react';
 import {RouteTag} from './RouteTag';
-import {Card} from 'antd';
+import {Card, Row, Col} from 'antd';
 import EditRoute from './EditRoute';
 
 export const Route = ({route}) => {
@@ -26,19 +26,21 @@ export const Route = ({route}) => {
    grade = editable ? <RouteTag text = {grade}/> : grade
    wall = editable ? <RouteTag text = {wall}/> : wall
 
-
    const gridStyle = {
       padding: "0px",
       margin: "0px",
       textAlign: "center",
-      verticalAlign: "middle"
+      verticalAlign: "middle",
+      width: "25%",
    }
    return (
-      <Card size = "small" extra = {grade} title = {name} hoverable bodyStyle = {{height: "10%"}} headStyle = {{fontSize: "16px",borderRight: `5px solid ${color}` }} style = {{width: 500}}>
-            <Card.Grid hoverable = {false} style = {gridStyle}>{setter}</Card.Grid>
-            <Card.Grid hoverable = {false} style = {gridStyle}>{route.date}</Card.Grid>
-            <Card.Grid hoverable = {false} style = {gridStyle}>{wall}</Card.Grid>
-            <Card.Grid hoverable = {false} style = {gridStyle}><EditRoute/></Card.Grid>
+      <Card size = "small" extra = {grade} title = {name} hoverable bodyStyle = {{padding: "2px", fontSize: "14px", textAlign: "center"}} headStyle = {{fontSize: "18px",borderRight: `5px solid ${color}` }} style = {{width: 500}}>
+            <Row align = {"middle"}>
+               <Col span={7}>{setter}</Col>
+               <Col span={7}>{route.date}</Col>
+               <Col span={7}>{wall}</Col>
+               <Col span={1} offset = {2}><EditRoute/></Col>
+            </Row>
       </Card>
    )
 }

@@ -30,3 +30,10 @@ body {
    position: relative;
    transform: translateX(369px);
 }
+
+.grid-style {
+   padding: "0px";
+   margin: "0px";
+   text-align: "center";
+   vertical-align: "middle";
+}

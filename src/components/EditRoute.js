@@ -7,7 +7,7 @@ import { Icon } from '@ant-design/compatible';
 const EditRoute = () => {
 
    return (
-      <Button type="primary" icon={<Icon type = "SettingOutlined"/>}/>
+      <Button type="primary" size = "small" icon={<Icon type = "setting"/>}/>
    )
 }
 

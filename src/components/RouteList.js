@@ -16,6 +16,5 @@ export const RouteList = () => {
                </List.Item>
             )}
       />
-      
    )
 }
