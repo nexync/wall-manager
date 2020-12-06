@@ -23,9 +23,17 @@ export const GlobalProvider = ({children}) => {
       })
    }
 
+   function editRoute(id) {
+      dispatch({
+         type: 'EDIT_ROUTE',
+         payload: id,
+      })
+   }
+
    return(<GlobalContext.Provider value = 
       {{routes: state.routes,
       addRoute,
+      editRoute,
    }}>
       {children}
    </GlobalContext.Provider>);

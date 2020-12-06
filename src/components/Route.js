@@ -5,7 +5,7 @@ import EditRoute from './EditRoute';
 
 export const Route = ({route}) => {
    let color;
-   let editable = false;
+   let editable = route.editable;
    switch (route.color) {
       case "green":
          color = "#008000"
@@ -39,7 +39,7 @@ export const Route = ({route}) => {
                <Col span={7}>{setter}</Col>
                <Col span={7}>{route.date}</Col>
                <Col span={7}>{wall}</Col>
-               <Col span={1} offset = {2}><EditRoute/></Col>
+               <Col span={1} offset = {2}><EditRoute id={route.id}/></Col>
             </Row>
       </Card>
    )

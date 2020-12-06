@@ -4,10 +4,11 @@ import {GlobalContext} from '../context/GlobalState';
 import {Button} from 'antd';
 import { Icon } from '@ant-design/compatible';
 
-const EditRoute = () => {
+const EditRoute = (id) => {
+   const {editRoute} = useContext(GlobalContext);
 
    return (
-      <Button type="primary" size = "small" icon={<Icon type = "setting"/>}/>
+      <Button onClick={() => editRoute(id)} type="primary" size = "small" icon={<Icon type = "setting"/>}/>
    )
 }
 
