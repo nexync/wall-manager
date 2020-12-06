@@ -16,7 +16,17 @@ export const GlobalContext = createContext(initialState)
 export const GlobalProvider = ({children}) => {
    const [state, dispatch] = useReducer(AppReducer, initialState)
 
-   return(<GlobalContext.Provider value = {{routes: state.routes}}>
+   function addRoute(route) {
+      dispatch({
+         type: 'ADD_ROUTE',
+         payload: route,
+      })
+   }
+
+   return(<GlobalContext.Provider value = 
+      {{routes: state.routes,
+      addRoute,
+   }}>
       {children}
    </GlobalContext.Provider>);
 }

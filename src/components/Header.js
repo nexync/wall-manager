@@ -1,13 +1,11 @@
 import React from 'react'
-
-import {Button} from 'antd';
-import { Icon } from '@ant-design/compatible';
+import AddRoute from './AddRoute'
 
 export const Header = () => {
    return (
       <span className = 'header'>
          <label className = 'header-text'>Route List</label>
-         <Button className = 'header-button' type="primary" icon={<Icon type = "plus"/>}/>
+         <AddRoute/>
       </span>
    )
 }
