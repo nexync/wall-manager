@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import {GlobalContext} from '../context/GlobalState';
 
 import {Button} from 'antd';
-import { Icon } from '@ant-design/compatible';
+import { PlusOutlined } from '@ant-design/icons';
 
-const AddRoute = () => {
+export const AddRoute = () => {
    const {addRoute} = useContext(GlobalContext);
 
    const handleClick = () => {
@@ -15,8 +15,6 @@ const AddRoute = () => {
       addRoute(newRoute);
    }
    return (
-      <Button onClick={handleClick} className = 'header-button' type="primary" icon={<Icon type = "plus"/>}/>
+      <Button onClick={handleClick} className = 'header-button' type="primary" icon={<PlusOutlined/>}/>
    )
 }
-
-export default AddRoute

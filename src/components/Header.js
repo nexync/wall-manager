@@ -1,5 +1,5 @@
 import React from 'react'
-import AddRoute from './AddRoute'
+import {AddRoute} from './AddRoute'
 
 export const Header = () => {
    return (

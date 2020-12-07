@@ -4,8 +4,8 @@ import AppReducer from './AppReducer'
 //Initial State
 const initialState = {
    routes: [
-      { id: 1, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: '0', date: new Date().getMonth() + '/' + new Date().getDate(), editable: false},
-      { id: 2, name: 'Satanic Rituals', setter: 'Kook', grade: 12, color: 'red', wall: '7',date: new Date().getMonth() + '/' + new Date().getDate(), editable: false}
+      { id: 1, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: '0', date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false},
+      { id: 2, name: 'Satanic Rituals', setter: 'Kook', grade: 12, color: 'red', wall: '7',date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false}
    ]
 }
 
@@ -23,18 +23,32 @@ export const GlobalProvider = ({children}) => {
       })
    }
 
-   function editRoute(id) {
+   function editRoute({id}) {
       dispatch({
          type: 'EDIT_ROUTE',
          payload: id,
       })
    }
 
+   function editInfo(id,info,field) {
+
+      dispatch({
+         type: 'EDIT_INFO',
+         payload: {
+            id: id,
+            info: info,
+            field: field,
+         }
+      })
+   }
+
    return(<GlobalContext.Provider value = 
-      {{routes: state.routes,
-      addRoute,
-      editRoute,
-   }}>
+      {{
+         routes: state.routes,
+         addRoute,
+         editRoute,
+         editInfo,
+      }}>
       {children}
    </GlobalContext.Provider>);
 }
