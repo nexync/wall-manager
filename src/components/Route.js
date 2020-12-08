@@ -21,19 +21,20 @@ export const Route = ({route}) => {
    let name = route.name !== undefined ? route.name : "Route Name";
    let setter = route.setter !== undefined ? route.setter : "Setter";
    let grade = route.grade !== undefined ? `5.${route.grade}` : "Grade";
+   let gradea = route.gradea !== undefined ? route.gradea: '';
    let wall = route.wall !== undefined ? `Wall ${route.wall}` : "Wall";
 
    name = editable ? <RouteTag id={route.id} field = {"name"}/> : name
    setter = editable ? <RouteTag id={route.id} field = {"setter"}/> : setter
-   grade = editable ? <><RouteTag id={route.id} field = {"grade"}/> <GradeAdjust/></>  : grade
+   grade = editable ? <Row><Col span = {18}><RouteTag id={route.id} field = {"grade"}/></Col><Col span = {6}> <GradeAdjust id = {route.id}/> </Col></Row>  : <>{grade}{gradea}</>
    wall = editable ? <RouteTag id={route.id} field = {"wall"}/> : wall
    let date = editable ? <RouteTag id={route.id} field = {"date"}/> : route.date
 
    return (
       <Card size = "small" 
-            title = {<Row>
-               <Col span = {20}>{name}</Col>
-               <Col span = {4}>{grade}</Col> 
+            title = {<Row align = "middle"> 
+               <Col span = {18}>{name}</Col>
+               <Col style = {{fontSize: "14px", textAlign: "right"}} span = {6}>{grade}</Col> 
             </Row>} 
             hoverable 
             bodyStyle = {{padding: "2px", fontSize: "14px", textAlign: "center"}} 

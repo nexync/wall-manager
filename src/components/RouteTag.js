@@ -14,7 +14,7 @@ export const RouteTag = ({id,field}) => {
          [fontsize,textalign] = ["18px","left",placeholder="Route Name", type = "text"];
          break;
       case "grade":
-         [fontsize,textalign,placeholder,type] = ["14px","left",field.charAt(0).toUpperCase() + field.slice(1) + "       ","number"]
+         [fontsize,textalign,placeholder,type] = ["14px","right",field.charAt(0).toUpperCase() + field.slice(1) + "       ","number"]
          break;
       case "wall":
          [fontsize,textalign,placeholder,type] = ["14px","center",field.charAt(0).toUpperCase() + field.slice(1),"number"]

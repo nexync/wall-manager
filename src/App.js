@@ -7,8 +7,11 @@ import {GlobalProvider} from './context/GlobalState';
 
 import './App.css';
 
+import { Button } from 'antd';
+
 function App() {
    return ( 
+
    <GlobalProvider>
       <Header/>
       <div className = "container">

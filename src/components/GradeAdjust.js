@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { GlobalContext } from '../context/GlobalState';
+
 import {Menu,Button,Dropdown} from 'antd';
 
-export const GradeAdjust = () => {
+export const GradeAdjust = ({id}) => {
+   const {routes,editInfo} = useContext(GlobalContext)
+   const values = ['+','','-']
    const menu = (
-      <Menu>
+      <Menu onClick = {(e) => editInfo(id,values[e.key.slice(-1)],"gradea")}>
          <Menu.Item>
             +
          </Menu.Item>
@@ -14,11 +18,11 @@ export const GradeAdjust = () => {
             -
          </Menu.Item>
       </Menu>
-    );
-
+      );
+   let [route] = routes.filter((r) => r.id === id);
    return (
       <Dropdown overlay={menu} placement="bottomCenter">
-        <Button onClick = {() => alert("hi")} style = {{width: "50px"}} size = "small"> a </Button>
+        <Button style = {{width: "25px"}} size = "small"> {route.gradea} </Button>
       </Dropdown>
    )
 }
