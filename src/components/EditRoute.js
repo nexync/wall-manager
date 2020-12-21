@@ -6,7 +6,6 @@ import { SettingOutlined } from '@ant-design/icons';
 
 export const EditRoute = (id) => {
    const {editRoute} = useContext(GlobalContext);
-
    return (
       <Button onClick={() => editRoute(id)} type="primary" size = "small" icon={<SettingOutlined/>}/>
    )

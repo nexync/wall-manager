@@ -26,14 +26,14 @@ function App() {
 
    return ( 
    <GlobalProvider>
-      <div className = {`${isSticky ? 'sticky' : ''}`} ref={ref}>
+      <div> 
          <Header/>
       </div>
-      <div className = "container">
+      <div className = {'container'}>
          <RouteList/>
       </div>
    </GlobalProvider>
    );
 }
-
+//className = {`${isSticky ? 'sticky' : ''}`} ref={ref}>
 export default App;

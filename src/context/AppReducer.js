@@ -17,6 +17,11 @@ const AppReducer = (state,action) => {
             ...state,
             routes: state.routes.map(r => r.id === action.payload.id ? route : r)
          }
+      case 'DELETE_ROUTE':
+         return {
+            ...state,
+            routes: state.routes.filter(route => route.id !== action.payload)
+         }
       default:
          return state;
    }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {RouteTag} from './RouteTag';
 import {EditRoute} from './EditRoute';
+import {DeleteRoute} from './DeleteRoute';
 import { GradeAdjust } from './GradeAdjust';
 
 import {Card, Row, Col} from 'antd';
@@ -31,7 +32,7 @@ export const Route = ({route}) => {
    let date = editable ? <RouteTag id={route.id} field = {"date"}/> : route.date
 
    return (
-      <Card size = "small" 
+      <Card size = "small"
             title = {<Row align = "middle"> 
                <Col span = {18}>{name}</Col>
                <Col style = {{fontSize: "14px", textAlign: "right"}} span = {6}>{grade}</Col> 
@@ -45,7 +46,8 @@ export const Route = ({route}) => {
             <Col span={7}>{setter}</Col>
             <Col span={7}>{date}</Col>
             <Col span={7}>{wall}</Col>
-            <Col span={1} offset = {2}><EditRoute id={route.id}/></Col>
+            <Col span={1} offset = {1}><EditRoute id={route.id}/></Col>
+            <Col span = {1}><DeleteRoute id={route.id}/></Col>
          </Row>
       </Card>
    )
