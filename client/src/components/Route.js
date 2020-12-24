@@ -25,11 +25,11 @@ export const Route = ({route}) => {
    let gradea = route.gradea !== undefined ? route.gradea: '';
    let wall = route.wall !== undefined ? `Wall ${route.wall}` : "Wall";
 
-   name = editable ? <RouteTag id={route.id} field = {"name"}/> : name
-   setter = editable ? <RouteTag id={route.id} field = {"setter"}/> : setter
-   grade = editable ? <Row><Col span = {18}><RouteTag id={route.id} field = {"grade"}/></Col><Col span = {6}> <GradeAdjust id = {route.id}/> </Col></Row>  : <>{grade}{gradea}</>
-   wall = editable ? <RouteTag id={route.id} field = {"wall"}/> : wall
-   let date = editable ? <RouteTag id={route.id} field = {"date"}/> : route.date
+   name = editable ? <RouteTag id={route._id} field = {"name"}/> : name
+   setter = editable ? <RouteTag id={route._id} field = {"setter"}/> : setter
+   grade = editable ? <Row><Col span = {18}><RouteTag id={route._id} field = {"grade"}/></Col><Col span = {6}> <GradeAdjust id = {route.id}/> </Col></Row>  : <>{grade}{gradea}</>
+   wall = editable ? <RouteTag id={route._id} field = {"wall"}/> : wall
+   let date = editable ? <RouteTag id={route._id} field = {"date"}/> : route.date
 
    return (
       <Card size = "small"
@@ -46,8 +46,8 @@ export const Route = ({route}) => {
             <Col span={7}>{setter}</Col>
             <Col span={7}>{date}</Col>
             <Col span={7}>{wall}</Col>
-            <Col span={1} offset = {1}><EditRoute id={route.id}/></Col>
-            <Col span = {1}><DeleteRoute id={route.id}/></Col>
+            <Col span={1} offset = {1}><EditRoute route = {route} id={route._id}/></Col>
+            <Col span = {1}><DeleteRoute id={route._id}/></Col>
          </Row>
       </Card>
    )

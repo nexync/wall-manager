@@ -3,11 +3,18 @@ const dotenv = require('dotenv')
 const colors = require('colors')
 const morgan = require('morgan')
 
-dotenv.config({ path: './config/config.env'});
-
 const routes = require('./routes/routes')
+const connectDB = require('./config/db')
+
+dotenv.config({ path: './config/config.env'});
+connectDB();
 
 const app = express();
+app.use(express.json());
+
+if(process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 
 app.use('/api/v1/routes', routes)
 

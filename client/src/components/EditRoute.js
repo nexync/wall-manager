@@ -4,10 +4,10 @@ import {GlobalContext} from '../context/GlobalState';
 import {Button} from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
 
-export const EditRoute = (id) => {
+export const EditRoute = (route, id) => {
    const {editRoute} = useContext(GlobalContext);
    return (
-      <Button onClick={() => editRoute(id)} type="primary" size = "small" icon={<SettingOutlined/>}/>
+      <Button onClick={() => editRoute(route, id)} type="primary" size = "small" icon={<SettingOutlined/>}/>
    )
 }
 

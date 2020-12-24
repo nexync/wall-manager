@@ -24,7 +24,7 @@ export const RouteTag = ({id,field}) => {
          break;
    }
 
-   let [route] = routes.filter((r) => r.id === id);
+   let [route] = routes.filter((r) => r._id === id);
    return (
       <Input type = {type} style = {{fontSize: fontsize, margin: "0px", padding: "0px", textAlign: textalign}} placeholder = {placeholder} value = {route[field]} bordered={false} onChange = {(e) => editInfo(id,e.target.value,field)}/>
    )
