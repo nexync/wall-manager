@@ -5,15 +5,6 @@ import AppReducer from './AppReducer'
 const initialState = {
    routes: [
       { id: 1, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 4, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 15, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 16, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 17, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 18, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 19, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 10, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 11, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
-      { id: 12, name: 'Route Name', setter: 'Setter', grade: 11, color: 'green', wall: 0, date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: ''},
       { id: 2, name: 'Satanic Rituals', setter: 'Kook', grade: 12, color: 'red', wall: 7,date: new Date().getMonth()+1 + '/' + new Date().getDate(), editable: false, gradea: '+'}
    ]
 }

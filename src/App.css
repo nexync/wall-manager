@@ -1,33 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 @import '~antd/dist/antd.css';
 
-body {
-   background-color: #f7f7f7;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   min-height: 100vh;
-   margin: 0;
+.header {
+   width: 500px;
+   margin: 50px auto;
    font-family: 'Lato', sans-serif;
 }
 
 .container {
-   align-self: center;
    margin: 30px auto;
    width: 500px;
+   font-family: 'Lato', sans-serif;
 }
- 
- .sticky {
-   position: fixed;
-   top: 0;
-   left: 810px;
-   right: 0;
-   z-index: 1;
-   text-align: left;
-   width: 500px;
-   background-color: pink;
- }
+
+.pie-chart{
+   width: 300px;
+   margin: auto;
+}
+.bar-graph{
+   width: 800px;
+   margin: 50px auto;
+}
 
 .header-text{
    display: inline-block;

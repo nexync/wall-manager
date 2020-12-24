@@ -1,39 +1,31 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 
 import {Header} from './components/Header';
 import {RouteList} from './components/RouteList';
+import BreakdownSetter from './components/BreakdownSetter';
+import { BreakdownGrade } from './components/BreakdownGrade';
 
 import {GlobalProvider} from './context/GlobalState';
 
 import './App.css';
 
+
 function App() {
-   const [isSticky, setSticky] = useState(false);
-   const ref = useRef(null);
-   const handleScroll = () => {
-      if (ref.current) {
-         setSticky(ref.current.getBoundingClientRect().top <= 0);
-      }
-   };
-
-   useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-  
-      return () => {
-        window.removeEventListener('scroll', () => handleScroll);
-      };
-    }, []);
-
    return ( 
    <GlobalProvider>
-      <div> 
+      <div className = 'header'> 
          <Header/>
       </div>
-      <div className = {'container'}>
+      <div className = 'container'>
          <RouteList/>
+      </div>
+      <div className = 'pie-chart'>
+         <BreakdownSetter/>
+      </div>
+      <div className = 'bar-graph'>
+         <BreakdownGrade/>
       </div>
    </GlobalProvider>
    );
 }
-//className = {`${isSticky ? 'sticky' : ''}`} ref={ref}>
 export default App;

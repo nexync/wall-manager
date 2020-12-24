@@ -13,7 +13,7 @@ export const RouteList = () => {
       else return route1[field].toLowerCase().localeCompare(route2[field].toLowerCase());
    }
 
-   let displayroutes = routes.sort((route1,route2)=>comparator(route1,route2,"name"))
+   let displayroutes = routes.slice().sort((route1,route2)=>comparator(route1,route2,"name"))
    return (
       <List grid = {{gutter: 10, column: 1}} 
             dataSource = {routes} 

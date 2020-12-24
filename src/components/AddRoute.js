@@ -11,6 +11,7 @@ export const AddRoute = () => {
       const newRoute = {
          id: Math.floor(Math.random() * 100000000),
          date: new Date().getMonth() + '/' + new Date().getDate(),
+         gradea: "",
       }
       addRoute(newRoute);
    }
