@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 import {DatePicker, Input} from 'antd'
-import { GlobalContext } from '../context/GlobalState'
+import { GlobalContext } from '../../context/GlobalState'
 
 export const RouteTag = ({id,field}) => {
    const {routes,editInfo} = useContext(GlobalContext);

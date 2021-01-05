@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Pie } from '@ant-design/charts';
-import { GlobalContext } from '../context/GlobalState'
+import { GlobalContext } from '../../context/GlobalState'
 
 export const BreakdownSetter = () => {
    const {routes} = useContext(GlobalContext);

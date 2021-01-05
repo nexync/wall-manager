@@ -4,9 +4,9 @@ import axios from 'axios'
 
 //Initial State
 const initialState = {
-   routes: [],
-	 error: null,
-	 loading: true
+	routes: [],
+	error: null,
+	loading: true
 }
 
 //Create Context
@@ -19,7 +19,7 @@ export const GlobalProvider = ({children}) => {
 
 	async function getRoutes() {
 		try {
-			const res = await axios.get('/api/v1/routes');
+			const res = await axios.get('/api/routes/dashboard');
 			console.log(res.data.data)
 			dispatch({
 				type: 'GET_ROUTES',
@@ -40,7 +40,7 @@ export const GlobalProvider = ({children}) => {
 			}
 		}
 		try {
-			const res = await axios.post('/api/v1/routes', route,config)
+			const res = await axios.post('/api/routes/dashboard', route,config)
 			dispatch({
 				type: 'ADD_ROUTE',
 				payload: res.data.data,
@@ -61,7 +61,7 @@ export const GlobalProvider = ({children}) => {
 		}
 		try {
 			if(route.editable)
-				await axios.put(`/api/v1/routes/${id}`, route, config)
+				await axios.put(`/api/routes/dashboard${id}`, route, config)
 
 			dispatch({
 				type: 'EDIT_ROUTE',
@@ -88,7 +88,7 @@ export const GlobalProvider = ({children}) => {
 
 	async function deleteRoute({id}) {
 		try {
-			await axios.delete(`/api/v1/routes/${id}`);
+			await axios.delete(`/api/routes/dashboard${id}`);
 			dispatch({
 				type: 'DELETE_ROUTE',
 				payload: id,

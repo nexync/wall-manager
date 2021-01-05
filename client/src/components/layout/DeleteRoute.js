@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {GlobalContext} from '../context/GlobalState';
+import {GlobalContext} from '../../context/GlobalState';
 
 import {Button} from 'antd';
 import { CloseOutlined } from '@ant-design/icons';

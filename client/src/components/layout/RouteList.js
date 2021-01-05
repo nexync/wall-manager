@@ -1,5 +1,5 @@
 import React, {useContext, useEffect } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 import {Route} from './Route'
 
 import {List} from 'antd'
@@ -13,7 +13,6 @@ export const RouteList = () => {
 	// 	if (field === "grade" || field === "wall") return route1[field] - route2[field];
 	// 	else return route1[field].toLowerCase().localeCompare(route2[field].toLowerCase());
   //  }
-
 	//let displayroutes = routes.slice().sort((route1,route2)=>comparator(route1,route2,"name"))
 	useEffect(() => {
 		getRoutes();

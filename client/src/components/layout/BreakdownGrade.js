@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 
 import { Column } from '@ant-design/charts';
 export const BreakdownGrade = () => {

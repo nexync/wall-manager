@@ -1,11 +1,11 @@
 import React from 'react';
-
-import {Header} from './components/Header';
-import {RouteList} from './components/RouteList';
-import BreakdownSetter from './components/BreakdownSetter';
-import { BreakdownGrade } from './components/BreakdownGrade';
-
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {GlobalProvider} from './context/GlobalState';
+
+import Home from './components/pages/Home'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
+import Dashboard from './components/pages/Dashboard'
 
 import './App.css';
 
@@ -13,18 +13,14 @@ import './App.css';
 function App() {
    return ( 
    <GlobalProvider>
-      <div className = 'header'> 
-         <Header/>
-      </div>
-      <div className = 'container'>
-         <RouteList/>
-      </div>
-      <div className = 'pie-chart'>
-         <BreakdownSetter/>
-      </div>
-      <div className = 'bar-graph'>
-         <BreakdownGrade/>
-      </div>
+      <Router>
+				<Switch>
+					<Route exact path = '/' component = {Home}/>
+					<Route exact path = '/login' component = {Login}/>
+					<Route exact path = '/register' component = {Register}/>
+					<Route exact path = '/dashboard' component = {Dashboard}/>
+				</Switch>
+			</Router>
    </GlobalProvider>
    );
 }
