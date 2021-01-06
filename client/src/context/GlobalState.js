@@ -6,7 +6,8 @@ import axios from 'axios'
 const initialState = {
 	routes: [],
 	error: null,
-	loading: true
+	loading: true,
+	currUser: null,
 }
 
 //Create Context
@@ -19,7 +20,7 @@ export const GlobalProvider = ({children}) => {
 
 	async function getRoutes() {
 		try {
-			const res = await axios.get('/api/routes/dashboard');
+			const res = await axios.get('/api/dashboard');
 			console.log(res.data.data)
 			dispatch({
 				type: 'GET_ROUTES',
@@ -27,7 +28,7 @@ export const GlobalProvider = ({children}) => {
 			})
 		} catch (err) {
 			dispatch({
-				type: 'TRANSACTION_ERROR',
+				type: 'ERROR',
 				payload: err.response.data				
 			})
 		}
@@ -40,14 +41,14 @@ export const GlobalProvider = ({children}) => {
 			}
 		}
 		try {
-			const res = await axios.post('/api/routes/dashboard', route,config)
+			const res = await axios.post('/api/dashboard', route,config)
 			dispatch({
 				type: 'ADD_ROUTE',
 				payload: res.data.data,
 			})
 		} catch(err) {
 			dispatch({
-				type: 'TRANSACTION_ERROR',
+				type: 'ERROR',
 				payload: err.response.data				
 			})
 		}
@@ -61,7 +62,7 @@ export const GlobalProvider = ({children}) => {
 		}
 		try {
 			if(route.editable)
-				await axios.put(`/api/routes/dashboard${id}`, route, config)
+				await axios.put(`/api/dashboard${id}`, route, config)
 
 			dispatch({
 				type: 'EDIT_ROUTE',
@@ -69,7 +70,7 @@ export const GlobalProvider = ({children}) => {
 		})
 		} catch (err) {
 			dispatch({
-				type: 'TRANSACTION_ERROR',
+				type: 'ERROR',
 				payload: err.response.data				
 			})
 		}
@@ -88,15 +89,81 @@ export const GlobalProvider = ({children}) => {
 
 	async function deleteRoute({id}) {
 		try {
-			await axios.delete(`/api/routes/dashboard${id}`);
+			await axios.delete(`/api/dashboard${id}`);
 			dispatch({
 				type: 'DELETE_ROUTE',
 				payload: id,
 			})
 		} catch (err) {
 			dispatch({
-				type: 'TRANSACTION_ERROR',
+				type: 'ERROR',
 				payload: err.response.data				
+			})
+		}
+	}
+
+	async function register(newuser) {
+		try {
+			const {email, password} = newuser;
+			const registerRes = await axios.post('/api/register', newuser);
+
+			const loginRes = await axios.post('/api/login', {email, password});
+			const user = {token: loginRes.data.token, user: loginRes.data.user}
+			localStorage.setItem('auth-token', loginRes.data.token);
+			console.log('User logged in and registered');
+			dispatch({
+				type: 'LOGIN_USER',
+				payload: user
+			})
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.message			
+			})
+		}
+	}
+
+	async function login({email, password}) {
+		try {
+			const loginRes = await axios.post('/api/login', {email, password});
+			const user = {token: loginRes.data.token, user: loginRes.data.user}
+			localStorage.setItem('auth-token', loginRes.data.token);
+			dispatch({
+				type: 'LOGIN_USER',
+				payload: user
+			})
+			return true;
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.message			
+			})
+			return false;
+		}
+	}
+
+	async function logout() {
+		localStorage.setItem("auth-token", "");
+		dispatch({
+			type: 'LOGIN_USER',
+			payload: null
+		})
+	}
+
+	async function check() {
+		let token = localStorage.getItem("auth-token");
+		if(token === null) {
+			localStorage.setItem("auth-token", "");
+			token = ""
+		}
+
+		const tokenRes = await axios.post('/api/token', null, {headers: {'x-auth-token': token }})
+		if (tokenRes.data) {
+			const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
+			const user = {token: token, user: userRes.data.user}
+			dispatch({
+				type: 'LOGIN_USER',
+				payload: user
 			})
 		}
 	}
@@ -106,11 +173,16 @@ export const GlobalProvider = ({children}) => {
 			routes: state.routes,
 			error: state.error,
 			loading: state.loading,
+			currUser: state.currUser,
 			getRoutes,
 			addRoute,
 			editRoute,
 			editInfo,
 			deleteRoute,
+			register,
+			login,
+			logout,
+			check,
 		}}>
 		{children}
 	</GlobalContext.Provider>);

@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Button, Image} from 'antd'
 import {useHistory} from 'react-router-dom'
 import logo from '../../assets/logo.png'
+import { GlobalContext } from '../../context/GlobalState'
 
 export default function Home() {
+	const {check, currUser} = useContext(GlobalContext)
+
+	console.log(currUser)
+	useEffect(() => {
+		check()
+	})
+
 	const history = useHistory();
 	return (
 		<div align = 'center'>

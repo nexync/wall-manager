@@ -18,7 +18,7 @@ if(process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-app.use('/api/routes', routes)
+app.use('/api/', routes)
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,21 +1,34 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { useHistory } from 'react-router-dom'
-import { Image, Input, Button} from 'antd'
+import { Image, Input, Button, Form} from 'antd'
 
 import logo from '../../assets/logo.png'
+import { GlobalContext } from '../../context/GlobalState';
 
 export default function Login() {
 	const history = useHistory();
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	const login = () => {
-		console.log('logged in');
+	const {login, error} = useContext(GlobalContext)
+
+	const handleSubmit = async () => {
+		try {
+			const loginres = await login({email, password})
+			if (loginres)
+				history.push('/dashboard')
+			else{
+				console.log(error.message)
+			}
+		} catch (err) {
+			console.log(err.message)
+		}
+			
 	}
 	return (
 		<div align = "center">
 			<Image src = {logo} className = "image" onClick = {() => history.push('/')}/>
-			<form onSubmit = {login}>
+			<Form onFinish = {handleSubmit}>
 				<div className = "input-label">
 					Log Into DukeWall
 				</div>
@@ -40,9 +53,9 @@ export default function Login() {
 					/>
 				</div>
 				<div className = 'form-button'>
-					<Button type = 'submit' ghost = {true} block = {true} size = 'large'>Login</Button>
+					<Button htmlType = 'submit' ghost = {true} block = {true} size = 'large'>Login</Button>
 				</div>
-			</form>
+			</Form>
 		
 		</div>
 	)

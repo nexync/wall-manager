@@ -1,11 +1,12 @@
 const User = require('../models/User');
-const router = require('../routes/routes');
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 exports.addUser = async (req,res) => {
 	try {
-		let {email, password, password2, displayname} = req.body;
+		const {email, displayname, password, password2} = req.body;
 
-		if(!email || !password || !password2) {
+		if(!email || !password || !password2 || !displayname) {
 			return res.status(400).json({
 				success: false,
 				error: "Not all fields have been filled."
@@ -34,9 +35,7 @@ exports.addUser = async (req,res) => {
 			}) 
 		}
 
-		if(!displayname)	displayname = email;
-
-		const salt = bcrypt.genSalt();
+		const salt = await bcrypt.genSalt();
 		const passwordHash = await bcrypt.hash(password, salt);
 
 		const newUser = new User({
@@ -44,7 +43,7 @@ exports.addUser = async (req,res) => {
 			password: passwordHash,
 			displayname: displayname,
 		});
-
+		
 		const savedUser = await newUser.save();
 
 		return res.status(201).json({
@@ -54,13 +53,14 @@ exports.addUser = async (req,res) => {
 	} catch (err) {
 		return res.status(500).json({
 			success: false,
-			error: 'Server Error'
+			error: err.message
 		})
 	}
 }
 
 exports.loginUser = async (req, res) => {
 	try {
+		console.log('here')
 		const {email, password} = req.body;
 
 		if (!email || !password) {
@@ -70,19 +70,19 @@ exports.loginUser = async (req, res) => {
 			})
 		}
 
-		const user = await User.findOne({email: emai });
+		const user = await User.findOne({email: email });
 		if(!user) {
 			return res.status(400).json({
 				success: false,
 				error: "User not found."
 			})
 		}
-
+		
 		const isMatch = bcrypt.compare(password, user.password)
 		if(!isMatch) {
 			return res.status(400).json({
 				success: false,
-				error: "Wrong"
+				error: "Wrong password"
 			})
 		}
 
@@ -120,7 +120,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.checkToken = async (req, res) => {
 	try {
-		const token = req.header('auth-token');
+		const token = req.header('x-auth-token');
 		if (!token)	return res.json(false);
 
 		const verified = jwt.verify(token, process.env.JWT_SECRET);
