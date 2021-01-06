@@ -16,6 +16,6 @@ export const AddRoute = () => {
       addRoute(newRoute);
    }
    return (
-      <Button onClick={handleClick} className = 'header-button' type="primary" icon={<PlusOutlined/>}/>
+      <Button onClick={handleClick} className = 'add' type="primary" icon={<PlusOutlined/>}/>
    )
 }

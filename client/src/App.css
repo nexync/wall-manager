@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 @import '~antd/dist/antd.css';
 
-.header {
-   width: 500px;
-   margin: 50px auto;
-   font-family: 'Lato', sans-serif;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #333333;
+	color: #ffffff
 }
 
 .container {
@@ -13,25 +18,70 @@
    font-family: 'Lato', sans-serif;
 }
 
-.pie-chart{
-   width: 300px;
-   margin: auto;
-}
-.bar-graph{
-   width: 800px;
-   margin: 50px auto;
+.header {
+	width: 500px;
+	margin: 50px auto;
+	font-family: 'Lato', sans-serif;
 }
 
-.header-text{
+.header .text{
    display: inline-block;
    vertical-align: middle;
    font-size: 22px;
    font-family: 'Lato', sans-serif;
 }
 
-.header-button{
+.header .add{
    display: inline-block;
    vertical-align: middle;
    position: relative;
    transform: translateX(369px);
+}
+
+.button-container {
+	width: 300px;
+	margin: 50px auto;
+	font-family: 'Lato', sans-serif;
+}
+
+.image {
+	margin-top: 100px;
+	margin-bottom: 50px;
+  width: 20%;
+  padding: 20px;
+}
+
+.input-label {
+	font-family: 'Lato', sans-serif;
+	font-size: 28px;
+}
+
+.input-container {
+	font-family: 'Lato', sans-serif;
+	width: 400px;
+	margin: 50px auto;
+}
+
+.form-button {
+	width: 400px;
+	margin: 50px auto;
+	font-family: 'Lato', sans-serif;
+}
+
+.pie-chart{
+	width: 300px;
+	margin: auto;
+}
+.bar-graph{
+	width: 800px;
+	margin: 50px auto;
+}
+
+@media screen and (max-width: 300) {
+	.header {
+		width: 300px;
+	}
+	.container {
+		width: 300px;
+	}
 }

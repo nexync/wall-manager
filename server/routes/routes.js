@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getRoutes, addRoute, deleteRoute, updateRoute } = require('../controllers/route_controller');
 const { addUser, loginUser, checkToken, deleteUser, getUserInfo } = require('../controllers/user_controller');
+const auth = require('../middleware/auth')
 
 router
 	.route('/dashboard')
@@ -26,11 +27,9 @@ router
 	.post(checkToken)
 
 router
-	.route('/profile')
-	.delete(deleteUser)
+	.delete('/profile', auth, deleteUser)
 
 router
-	.route('/')
-	.get(getUserInfo)
+	.get('/', auth, getUserInfo)
 
 module.exports = router;

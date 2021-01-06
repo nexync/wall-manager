@@ -4,7 +4,7 @@ import {AddRoute} from './AddRoute'
 export const Header = () => {
    return (
       <div>
-         <label className = 'header-text'>Route List</label>
+         <label className = 'text'>Route List</label>
          <AddRoute/>
       </div>
    )

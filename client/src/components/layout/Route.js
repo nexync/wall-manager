@@ -40,14 +40,12 @@ export const Route = ({route}) => {
             hoverable 
             bodyStyle = {{padding: "2px", fontSize: "14px", textAlign: "center"}} 
             headStyle = {{fontSize: "18px",borderRight: `5px solid ${color}` }} 
-            style = {{width: 500}
+            style = {{width: 400}
       }>
          <Row align = {"middle"}>
-            <Col span={7}>{setter}</Col>
-            <Col span={7}>{date}</Col>
-            <Col span={7}>{wall}</Col>
-            <Col span={1} offset = {1}><EditRoute route = {route} id={route._id}/></Col>
-            <Col span = {1}><DeleteRoute id={route._id}/></Col>
+            <Col span={8}>{setter}</Col>
+            <Col span={8}>{date}</Col>
+            <Col span={8}>{wall}</Col>
          </Row>
       </Card>
    )

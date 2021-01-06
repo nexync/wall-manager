@@ -2,7 +2,9 @@ import React, {useContext, useEffect } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 import {Route} from './Route'
 
-import {List} from 'antd'
+import {List, Row, Col} from 'antd'
+import { EditRoute } from './EditRoute';
+import { DeleteRoute } from './DeleteRoute';
 
 export const RouteList = () => {
 	const {routes, getRoutes } = useContext(GlobalContext);
@@ -24,7 +26,11 @@ export const RouteList = () => {
 			dataSource = {routes} 
 			renderItem={route => (
 				<List.Item>
-					<Route key = {route.id} route={route} />
+					<Row>
+						<Col span = {20}> <Route key = {route.id} route={route} /> </Col>
+            <Col span={2}><EditRoute route = {route} id={route._id}/></Col>
+            <Col span = {2}><DeleteRoute id={route._id}/></Col>
+					</Row>
 				</List.Item>
 			)}
 		/>
