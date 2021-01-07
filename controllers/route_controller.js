@@ -3,20 +3,20 @@ const Route = require('../models/Route');
 // @desc        Get all routes
 // @routes      GET/api/routes
 exports.getRoutes = async (req, res) => {
-   try {
-      const routes = await Route.find();
-
-      return res.status(200).json({
-         success: true,
-         count: routes.length,
-         data: routes,
-      })
-   } catch (err) {
-      return res.status(500).json({
-         success: false,
-         error: 'Server Error'
-      })
-   }
+	try {
+		const routes = await Route.find();
+		console.log(routes);
+		return res.status(200).json({
+				success: true,
+				count: routes.length,
+				data: routes,
+		})
+	} catch (err) {
+		return res.status(500).json({
+				success: false,
+				error: 'Server Error'
+		})
+	}
 }
 
 
