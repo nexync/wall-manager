@@ -14,6 +14,7 @@ export default function Home() {
 			if (logincheck)	history.push('/dashboard');
 		}
 		asyncwrapper();
+		// eslint-disable-next-line
 	}, [])
 
 	return (
