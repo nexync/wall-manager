@@ -3,12 +3,29 @@ const dotenv = require('dotenv')
 const colors = require('colors')
 const morgan = require('morgan')
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 const routes = require('./routes/routes')
-const connectDB = require('./config/db')
 
-dotenv.config({ path: './config/config.env'});
+dotenv.config({ path: './.env'});
+
+const connectDB = async () => {
+	try {
+		 const conn = await mongoose.connect(process.env.MONGO_URI, {
+				useNewUrlParser: true,
+				useCreateIndex: true,
+				useUnifiedTopology: true
+		 });
+
+		 console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+	} catch (err) {
+		 console.log(`Error: ${err.message}`.red);
+		 process.exit(1);
+	}
+}
+
 connectDB();
+
 
 const app = express();
 app.use(express.json());
