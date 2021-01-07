@@ -4,6 +4,7 @@ const colors = require('colors')
 const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const path = require('path')
 
 const routes = require('./routes/routes')
 
@@ -15,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
 	useUnifiedTopology: true
 }, (err) => {
 	if (err) throw err;
-	console.log(`MongoDB Connected`);
+	console.log(`MongoDB Connected`.cyan.underline);
 });
 
 const app = express();
