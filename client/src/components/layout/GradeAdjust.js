@@ -7,7 +7,7 @@ export const GradeAdjust = ({id}) => {
 	const {routes,editInfo} = useContext(GlobalContext)
 	const values = ['+','','-']
 	const menu = (
-		<Menu onClick = {(e) => editInfo(id,values[e.key.slice(-1)],"color")}>
+		<Menu onClick = {(e) => editInfo(id,values[e.key.slice(-1)],"gradea")}>
 				<Menu.Item>
 					+
 				</Menu.Item>
