@@ -25,11 +25,13 @@ export const GlobalProvider = ({children}) => {
 				type: 'GET_ROUTES',
 				payload: res.data.data
 			})
+			return true;
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
 			})
+			return false;
 		}
 	}
 
