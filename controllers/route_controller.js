@@ -42,14 +42,15 @@ exports.addRoute = async (req, res) => {
 exports.updateRoute = async (req, res) => {
    try {
       const route = await Route.findById(req.params.id);
-      const {name, setter, grade, gradea, wall, date} = req.body;
+      const {name, setter, grade, gradea, wall, date, color} = req.body;
       
       route.name = name;
       route.setter = setter;
       route.grade = grade;
       route.gradea = gradea;
       route.wall = wall;
-      route.date = date;
+			route.date = date;
+			route.color = color;
       route.save()
       return res.status(200).json({
          success: true,
