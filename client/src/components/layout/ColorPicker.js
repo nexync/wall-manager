@@ -5,7 +5,7 @@ import {Menu,Button,Dropdown} from 'antd';
 
 export const ColorPicker = ({id}) => {
 	const {routes,editInfo} = useContext(GlobalContext)
-   const values = ['','Red','Green']
+   const values = ['','Red','Green','Pink','Purple','Blue','Yellow','Black','Grey']
    const menu = (
       <Menu onClick = {(e) => editInfo(id,values[e.key.slice(-1)],"color")}>
          <Menu.Item>
@@ -16,6 +16,24 @@ export const ColorPicker = ({id}) => {
          </Menu.Item>
          <Menu.Item>
             Green
+         </Menu.Item>
+				 <Menu.Item>
+            Pink
+         </Menu.Item>
+				 <Menu.Item>
+            Purple
+         </Menu.Item>
+				 <Menu.Item>
+            Blue
+         </Menu.Item>
+				 <Menu.Item>
+            Yellow
+         </Menu.Item>
+				 <Menu.Item>
+            Black
+         </Menu.Item>
+				 <Menu.Item>
+            Grey
          </Menu.Item>
       </Menu>
       );

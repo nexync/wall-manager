@@ -26,6 +26,12 @@ export const Route = ({route}) => {
 			case "Yellow":
 				color = "#ffff00"
 				break;
+			case "Black":
+				color = "#000000"
+				break;
+			case "Grey":
+				color = "#e3e3de3"
+				break;
       default:
          color = "#FFFFFF"
    }
