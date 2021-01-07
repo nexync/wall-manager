@@ -41,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://oa-wall.herokuapp.com"
+  "proxy": "http://localhost:5000"
 }
