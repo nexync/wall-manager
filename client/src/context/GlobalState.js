@@ -26,13 +26,11 @@ export const GlobalProvider = ({children}) => {
 				type: 'GET_ROUTES',
 				payload: res.data.data
 			})
-			return true;
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
 			})
-			return false;
 		}
 	}
 
@@ -169,6 +167,7 @@ export const GlobalProvider = ({children}) => {
 			if (tokenRes.data) {
 				const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
 				const user = {token: token, user: userRes.data.user}
+				console.log(user);
 				dispatch({
 					type: 'LOGIN_USER',
 					payload: user
