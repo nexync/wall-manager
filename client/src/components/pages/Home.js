@@ -5,14 +5,17 @@ import logo from '../../assets/logo.png'
 import { GlobalContext } from '../../context/GlobalState'
 
 export default function Home() {
-	const {check, currUser} = useContext(GlobalContext)
-
-	console.log(currUser)
-	useEffect(() => {
-		check()
-	})
-
+	const {check} = useContext(GlobalContext)
 	const history = useHistory();
+
+	useEffect(() => {
+		const asyncwrapper = async () => {
+			const logincheck = await check()
+			if (logincheck)	history.push('/dashboard');
+		}
+		asyncwrapper();
+	}, [])
+
 	return (
 		<div align = 'center'>
 			<Image src = {logo} className = "image" onClick = {() => history.push('/')}/>

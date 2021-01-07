@@ -35,6 +35,13 @@ exports.addUser = async (req,res) => {
 			}) 
 		}
 
+		if(displayname === "Setter" || displayname === 'Guest') {
+			return res.status(400).json({
+				success: false,
+				error: "Invalid Name."
+			})
+		}
+
 		const salt = await bcrypt.genSalt();
 		const passwordHash = await bcrypt.hash(password, salt);
 
@@ -60,7 +67,6 @@ exports.addUser = async (req,res) => {
 
 exports.loginUser = async (req, res) => {
 	try {
-		console.log('here')
 		const {email, password} = req.body;
 
 		if (!email || !password) {

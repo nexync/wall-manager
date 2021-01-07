@@ -6,7 +6,7 @@ import {List, Row, Col} from 'antd'
 import { EditRoute } from './EditRoute';
 import { DeleteRoute } from './DeleteRoute';
 
-export const RouteList = () => {
+export const RouteList = ({setter}) => {
 	const {routes, getRoutes } = useContext(GlobalContext);
 
   //  function comparator(route1,route2,field) {
@@ -20,18 +20,22 @@ export const RouteList = () => {
 		getRoutes();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
+	console.log(routes);
 	return (
-		<List grid = {{gutter: 10, column: 1}} 
+		
+
+		<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
 			dataSource = {routes} 
 			renderItem={route => (
-				<List.Item>
-					<Row>
-						<Col span = {20}> <Route key = {route.id} route={route} /> </Col>
-            <Col span={2}><EditRoute route = {route} id={route._id}/></Col>
-            <Col span = {2}><DeleteRoute id={route._id}/></Col>
-					</Row>
-				</List.Item>
+			<List.Item>
+				{setter === true ? 
+					<Row justify = 'center' align = 'middle'>
+						<Col span = {22}> <Route key = {route._id} route={route} /> </Col>
+						<Col offset = {1} span={1}><EditRoute route = {route} id={route._id}/> <DeleteRoute id={route._id}/></Col>
+					</Row> :
+					<Route key = {route._id} route={route} />
+				}
+			</List.Item> 
 			)}
 		/>
 	)

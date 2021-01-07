@@ -13,17 +13,22 @@ export default function Register() {
 	
 	const history = useHistory();
 
-	const {register} = useContext(GlobalContext)
+	const {register, error} = useContext(GlobalContext)
 
-	const handleSubmit = () => {
-		const newuser = {
-			email: email,
-			displayname: name,
-			password: password,
-			password2: password2,
+	const handleSubmit = async () => {
+		try {
+			const newuser = {
+				email: email,
+				displayname: name,
+				password: password,
+				password2: password2,
+			}
+			const registerres = await register(newuser);
+			if (registerres)	history.push('/dashboard')
+		} catch (err) {
+			console.log(err.message)
 		}
-		register(newuser);
-		//history.push('/dashboard')
+		
 	}
 	return (
 		<div align = "center">
@@ -81,6 +86,9 @@ export default function Register() {
 				</div>
 				<div className = 'form-button'>
 					<Button htmlType = 'submit' ghost = {true} block = {true} size = 'large'>Register</Button>
+				</div>
+				<div className = 'error-text'>
+					<p>{error}</p>
 				</div>
 			</Form>
 		

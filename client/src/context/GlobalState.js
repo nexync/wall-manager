@@ -21,7 +21,6 @@ export const GlobalProvider = ({children}) => {
 	async function getRoutes() {
 		try {
 			const res = await axios.get('/api/dashboard');
-			console.log(res.data.data)
 			dispatch({
 				type: 'GET_ROUTES',
 				payload: res.data.data
@@ -105,7 +104,7 @@ export const GlobalProvider = ({children}) => {
 	async function register(newuser) {
 		try {
 			const {email, password} = newuser;
-			const registerRes = await axios.post('/api/register', newuser);
+			await axios.post('/api/register', newuser);
 
 			const loginRes = await axios.post('/api/login', {email, password});
 			const user = {token: loginRes.data.token, user: loginRes.data.user}
@@ -115,11 +114,13 @@ export const GlobalProvider = ({children}) => {
 				type: 'LOGIN_USER',
 				payload: user
 			})
+			return true;
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
-				payload: err.message			
+				payload: err.response.data.error			
 			})
+			return false;
 		}
 	}
 
@@ -136,7 +137,7 @@ export const GlobalProvider = ({children}) => {
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
-				payload: err.response.message			
+				payload: err.response.data.error			
 			})
 			return false;
 		}
@@ -151,21 +152,35 @@ export const GlobalProvider = ({children}) => {
 	}
 
 	async function check() {
-		let token = localStorage.getItem("auth-token");
-		if(token === null) {
-			localStorage.setItem("auth-token", "");
-			token = ""
-		}
+		console.log("checking for logged in user")
+		try {
+			let token = localStorage.getItem("auth-token");
+			if(token === null) {
+				localStorage.setItem("auth-token", "");
+				token = ""
+			}
 
-		const tokenRes = await axios.post('/api/token', null, {headers: {'x-auth-token': token }})
-		if (tokenRes.data) {
-			const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
-			const user = {token: token, user: userRes.data.user}
+			console.log(token)
+
+			const tokenRes = await axios.post('/api/token', null, {headers: {'x-auth-token': token }})
+			if (tokenRes.data) {
+				const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
+				const user = {token: token, user: userRes.data.user}
+				dispatch({
+					type: 'LOGIN_USER',
+					payload: user
+				})
+				return true
+			}
+			else	return false
+		} catch (err) {
 			dispatch({
-				type: 'LOGIN_USER',
-				payload: user
+				type: 'ERROR',
+				payload: err.response.data.error			
 			})
+			return false;
 		}
+		
 	}
 
 	return(<GlobalContext.Provider value = 

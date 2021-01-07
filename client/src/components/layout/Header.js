@@ -1,11 +1,18 @@
 import React from 'react'
 import {AddRoute} from './AddRoute'
 
-export const Header = () => {
+import { Row, Col } from 'antd'
+
+export const Header = ({setter}) => {
    return (
-      <div>
-         <label className = 'text'>Route List</label>
-         <AddRoute/>
-      </div>
+		<>
+			{setter === true ? 
+				<Row>
+					<Col span = {23}><label className = 'text'>Route List</label></Col>
+					<Col span = {1}><AddRoute/></Col>
+				</Row> :
+				<label className = 'text'>Route List</label>
+			}  
+		</>
    )
 }

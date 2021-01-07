@@ -17,9 +17,6 @@ export default function Login() {
 			const loginres = await login({email, password})
 			if (loginres)
 				history.push('/dashboard')
-			else{
-				console.log(error.message)
-			}
 		} catch (err) {
 			console.log(err.message)
 		}
@@ -54,6 +51,9 @@ export default function Login() {
 				</div>
 				<div className = 'form-button'>
 					<Button htmlType = 'submit' ghost = {true} block = {true} size = 'large'>Login</Button>
+				</div>
+				<div className = 'error-text'>
+					<p>{error}</p>
 				</div>
 			</Form>
 		

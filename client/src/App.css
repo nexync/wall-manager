@@ -14,28 +14,23 @@ body {
 
 .container {
    margin: 30px auto;
-   width: 500px;
+   width: 30%;
    font-family: 'Lato', sans-serif;
 }
 
 .header {
-	width: 500px;
+	width: 30%;
 	margin: 50px auto;
 	font-family: 'Lato', sans-serif;
 }
 
 .header .text{
-   display: inline-block;
-   vertical-align: middle;
-   font-size: 22px;
+   font-size: 1.5rem;
    font-family: 'Lato', sans-serif;
 }
 
 .header .add{
-   display: inline-block;
-   vertical-align: middle;
    position: relative;
-   transform: translateX(369px);
 }
 
 .button-container {
@@ -69,6 +64,16 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+.error-text {
+	font-family: 'Lato', sans-serif;
+	color: #ffffff
+}
+
+.route-display {
+	flex-direction: row;
+	display: flex
+}
+
 .pie-chart{
 	width: 300px;
 	margin: auto;
@@ -78,11 +83,3 @@ body {
 	margin: 50px auto;
 }
 
-@media screen and (max-width: 300) {
-	.header {
-		width: 300px;
-	}
-	.container {
-		width: 300px;
-	}
-}
