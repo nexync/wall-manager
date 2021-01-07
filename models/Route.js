@@ -25,6 +25,9 @@ const RouteSchema = new mongoose.Schema({
 	editable: {
 		type: Boolean,
 		default: false
+	},
+	color: {
+		type: String,
 	}
 })
 
