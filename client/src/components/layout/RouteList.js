@@ -7,7 +7,7 @@ import { EditRoute } from './EditRoute';
 import { DeleteRoute } from './DeleteRoute';
 
 export const RouteList = ({setter}) => {
-	const {routes } = useContext(GlobalContext);
+	const { routes } = useContext(GlobalContext);
 
   //  function comparator(route1,route2,field) {
 	// 	if (route1[field]===undefined) return -1;

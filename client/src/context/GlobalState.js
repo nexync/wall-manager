@@ -21,6 +21,7 @@ export const GlobalProvider = ({children}) => {
 	async function getRoutes() {
 		try {
 			const res = await axios.get('/api/dashboard');
+			console.log(res.data.data);
 			dispatch({
 				type: 'GET_ROUTES',
 				payload: res.data.data
