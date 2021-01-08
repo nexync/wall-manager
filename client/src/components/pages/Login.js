@@ -19,8 +19,7 @@ export default function Login() {
 				history.push('/dashboard')
 		} catch (err) {
 			console.log(err.message)
-		}
-			
+		}		
 	}
 	return (
 		<div align = "center">

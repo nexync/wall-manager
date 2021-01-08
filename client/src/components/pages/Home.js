@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png'
 import { GlobalContext } from '../../context/GlobalState'
 
 export default function Home() {
-	const {check, getRoutes} = useContext(GlobalContext)
+	const {check, getRoutes, login} = useContext(GlobalContext)
 	const history = useHistory();
 
 	useEffect(() => {
@@ -18,6 +18,16 @@ export default function Home() {
 		// eslint-disable-next-line
 	}, [])
 
+
+	const handleClick = async () => {
+		try {
+			const loginres = await login({email: "guest@duke.edu", password: "guest"})
+			if (loginres)
+				history.push('/dashboard')
+		} catch (err) {
+			console.log(err.message)
+		}		
+	}
 	return (
 		<div align = 'center'>
 			<Image src = {logo} className = "image" onClick = {() => history.push('/')}/>
@@ -28,7 +38,7 @@ export default function Home() {
 				<Button block = {true} ghost = {true} shape = {"round"} size = {"large"} onClick = {() => {history.push('/login')}}>Login</Button>
 			</div>
 			<div className = 'button-container'>
-				<Button block = {true} ghost = {true} shape = {"round"} size = {"large"} onClick = {() => {history.push('/dashboard')}}>Guest</Button>
+				<Button block = {true} ghost = {true} shape = {"round"} size = {"large"} onClick = {handleClick}>Guest</Button>
 			</div>
 			<p>Please don't sue me Duke</p>
 		</div>
