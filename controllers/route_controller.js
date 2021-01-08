@@ -5,7 +5,6 @@ const Route = require('../models/Route');
 exports.getRoutes = async (req, res) => {
 	try {
 		const routes = await Route.find();
-		console.log(routes);
 		return res.status(200).json({
 				success: true,
 				count: routes.length,
@@ -18,7 +17,6 @@ exports.getRoutes = async (req, res) => {
 		})
 	}
 }
-
 
 // @desc        Add a route
 // @routes      POST/api/routes

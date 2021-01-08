@@ -6,6 +6,7 @@ import Home from './components/pages/Home'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Dashboard from './components/pages/Dashboard'
+import Data from './components/pages/Data'
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
 					<Route exact path = '/login' component = {Login}/>
 					<Route exact path = '/register' component = {Register}/>
 					<Route exact path = '/dashboard' component = {Dashboard}/>
+					<Route exact path = '/data' component = {Data}/>
 				</Switch>
 			</Router>
    </GlobalProvider>

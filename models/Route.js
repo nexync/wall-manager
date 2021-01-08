@@ -23,8 +23,8 @@ const RouteSchema = new mongoose.Schema({
 		default: new Date().getMonth()+1 + '/' + new Date().getDate()
 	},
 	editable: {
-		type: Boolean,
-		default: false
+		type: Number,
+		default: 0
 	},
 	color: {
 		type: String,

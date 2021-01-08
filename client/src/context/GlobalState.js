@@ -21,7 +21,6 @@ export const GlobalProvider = ({children}) => {
 	async function getRoutes() {
 		try {
 			const res = await axios.get('/api/dashboard');
-			console.log(res.data.data);
 			dispatch({
 				type: 'GET_ROUTES',
 				payload: res.data.data
@@ -54,19 +53,25 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 	
-	async function editRoute({route, id}) {
+	async function editRouteState({route, id, newState}) {
+		if (route.editable === 1 && newState === 'delete')	return;
+		if (route.editable === -1 && newState === 'edit')	return;
+		
 		const config = {
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		}
 		try {
-			if(route.editable)
+			if(route.editable === 1)
 				await axios.put(`/api/dashboard${id}`, route, config)
 
 			dispatch({
-				type: 'EDIT_ROUTE',
-				payload: id,
+				type: 'EDIT_ROUTE_STATE',
+				payload: {
+					id,
+					newState
+				},
 		})
 		} catch (err) {
 			dispatch({
@@ -87,7 +92,7 @@ export const GlobalProvider = ({children}) => {
 		})
 	}
 
-	async function deleteRoute({id}) {
+	async function deleteRoute(id) {
 		try {
 			await axios.delete(`/api/dashboard${id}`);
 			dispatch({
@@ -161,8 +166,6 @@ export const GlobalProvider = ({children}) => {
 				token = ""
 			}
 
-			console.log(token)
-
 			const tokenRes = await axios.post('/api/token', null, {headers: {'x-auth-token': token }})
 			if (tokenRes.data) {
 				const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
@@ -193,7 +196,7 @@ export const GlobalProvider = ({children}) => {
 			currUser: state.currUser,
 			getRoutes,
 			addRoute,
-			editRoute,
+			editRouteState,
 			editInfo,
 			deleteRoute,
 			register,

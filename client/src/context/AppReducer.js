@@ -1,4 +1,5 @@
 const AppReducer = (state,action) => {
+	let route;
 	switch(action.type) {
 		case 'GET_ROUTES':
 			return {
@@ -11,17 +12,19 @@ const AppReducer = (state,action) => {
 				...state,
 				routes: [...state.routes, action.payload]
 			}
-		case 'EDIT_ROUTE':
+		case 'EDIT_ROUTE_STATE':
+			[route] = state.routes.filter((r) => r._id === action.payload.id);
+			const newEditable = action.payload.newState === 'edit' ? Math.abs(route.editable-1) : -(route.editable+1) 
 			return {
 				...state,
-				routes: state.routes.map(route => route._id === action.payload ? {...route, editable: !route.editable}: route)
+				routes: state.routes.map(route => route._id === action.payload.id ? {...route, editable: newEditable}: route)
 			}
 		case 'EDIT_INFO':
-			let [route] = state.routes.filter((r) => r._id === action.payload.id);
+			[route] = state.routes.filter((r) => r._id === action.payload.id);
 			route[action.payload.field] = action.payload.info;
 			return {
 				...state,
-				routes: state.routes.map(r => r._id === action.payload._id ? route : r)
+				routes: state.routes.map(r => r._id === action.payload.id ? route : r)
 			}
 		case 'DELETE_ROUTE':
 			return {

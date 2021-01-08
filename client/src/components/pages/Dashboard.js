@@ -6,6 +6,7 @@ import {RouteList} from '../layout/RouteList';
 import {Logout} from '../layout/Logout'
 import { GlobalContext } from '../../context/GlobalState';
 
+import {Button} from 'antd'
 
 export default function Dashboard() {
 	const {currUser} = useContext(GlobalContext)
@@ -23,6 +24,7 @@ export default function Dashboard() {
 			<div>
 				Hello {name}
 				<Logout/>
+				{name === 'Setter' ? <Button onClick = {() => history.push('/data')}>Route Data</Button> : null}
 			</div>
 			<div className = 'header'> 
          <Header setter = {name === 'Setter'}/>

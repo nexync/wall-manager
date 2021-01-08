@@ -17,7 +17,6 @@ export const RouteList = ({setter}) => {
   //  }
 	//let displayroutes = routes.slice().sort((route1,route2)=>comparator(route1,route2,"name"))
 
-	console.log(routes);
 	return (
 		<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
 			dataSource = {routes} 
@@ -26,7 +25,7 @@ export const RouteList = ({setter}) => {
 				{setter === true ? 
 					<Row justify = 'center' align = 'middle'>
 						<Col span = {22}> <Route key = {route._id} route={route} /> </Col>
-						<Col offset = {1} span={1}><EditRoute route = {route} id={route._id}/> <DeleteRoute id={route._id}/></Col>
+						<Col offset = {1} span={1}><EditRoute route = {route} id={route._id} newState = {'edit'}/> <DeleteRoute route = {route} id={route._id} newState = {'delete'}/></Col>
 					</Row> :
 					<Route key = {route._id} route={route} />
 				}
