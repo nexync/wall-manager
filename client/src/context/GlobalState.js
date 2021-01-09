@@ -53,7 +53,8 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 	
-	async function editRouteState({route, id, newState}) {
+	async function editRouteState(route, id, newState) {
+		console.log(route);
 		if (route.editable === 1 && newState === 'delete')	return;
 		if (route.editable === -1 && newState === 'edit')	return;
 		

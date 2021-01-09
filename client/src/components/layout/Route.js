@@ -21,7 +21,7 @@ export const Route = ({route}) => {
 		>
 			<Row align = {"middle"}>
 				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => deleteRoute(route._id)}>Yes, erase it forever.</Button></Col>
-				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => editRouteState({route, id: route._id, newState: "delete"})}>Noooooo</Button></Col>
+				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => editRouteState(route, route._id, "delete")}>Noooooo</Button></Col>
 			</Row>
 	</Card>
 		)

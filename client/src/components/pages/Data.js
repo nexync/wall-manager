@@ -5,7 +5,7 @@ import { GlobalContext } from '../../context/GlobalState'
 import {BreakdownGrade} from '../layout/BreakdownGrade'
 import {BreakdownSetter} from '../layout/BreakdownSetter'
 
-import {AutoComplete, Button} from 'antd'
+import {Button} from 'antd'
 
 export default function Data() {
 	const {currUser} = useContext(GlobalContext)

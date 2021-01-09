@@ -1,9 +1,33 @@
 import React from 'react'
 import {AddRoute} from './AddRoute'
 
-import { Row, Col } from 'antd'
+import { Row, Col, Button, Menu, Dropdown } from 'antd'
 
-export const Header = ({setter}) => {
+export const Header = ({setter, sortfunc}) => {
+	const values = ['dateu','dated','grade', 'name', 'wall']
+	const menu = (
+		<Menu onClick = {(e) => {
+				sortfunc(values[e.key.slice(-1)])
+			}}>
+				<Menu.Item>
+					Date (Recent)
+				</Menu.Item>
+				<Menu.Item>
+					Date (Latest)
+				</Menu.Item>
+				<Menu.Item>
+					Grade
+				</Menu.Item>
+				<Menu.Item>
+					Name
+				</Menu.Item>
+				<Menu.Item>
+					Wall
+				</Menu.Item>
+		</Menu>
+		);
+
+
    return (
 		<>
 			{setter === true ? 
@@ -11,7 +35,14 @@ export const Header = ({setter}) => {
 					<Col span = {23}><label className = 'text'>Route List</label></Col>
 					<Col span = {1}><AddRoute/></Col>
 				</Row> :
-				<label className = 'text'>Route List</label>
+				<Row>
+				<Col span = {20}><label className = 'text'>Route List</label></Col>
+				<Col span = {4}>
+					<Dropdown overlay={menu} placement="bottomCenter">
+						<Button ghost = {true} block = {true}>Sort</Button>
+					</Dropdown>
+				</Col>
+			</Row>
 			}  
 		</>
    )

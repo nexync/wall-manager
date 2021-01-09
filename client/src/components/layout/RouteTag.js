@@ -7,7 +7,9 @@ export const RouteTag = ({id,field}) => {
    let fontsize,textalign,placeholder,type;
 
    if (field === "date") {
-      return <DatePicker size = "small" onChange = {(e) => editInfo(id,e._d.getMonth()+1 + '/' + e._d.getDate(),field)} />
+      return <DatePicker size = "small" onChange = {(e) => {
+				if (e === null)	return editInfo(id,new Date().getMonth()+1 + '/' + new Date().getDate() + '/' + (new Date().getYear()-100),field)
+				return editInfo(id,e._d.getMonth()+1 + '/' + e._d.getDate() + '/' + (e._d.getYear()-100),field)}} />
    }
    switch(field) {
       case "name":
