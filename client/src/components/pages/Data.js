@@ -5,6 +5,8 @@ import { GlobalContext } from '../../context/GlobalState'
 import {BreakdownGrade} from '../layout/BreakdownGrade'
 import {BreakdownSetter} from '../layout/BreakdownSetter'
 
+import {AutoComplete, Button} from 'antd'
+
 export default function Data() {
 	const {currUser} = useContext(GlobalContext)
 	const history = useHistory();
@@ -18,6 +20,9 @@ export default function Data() {
 			</div>
 			<div className = 'pie-chart'>
 				<BreakdownSetter/>
+			</div>
+			<div align='center'>
+				<Button ghost = {true} onClick = {() => history.push('/dashboard')}>Back</Button>
 			</div>
 		</>
 	)
