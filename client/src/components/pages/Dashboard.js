@@ -39,8 +39,8 @@ export default function Dashboard() {
          <Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
       </div>
       <div className = 'container'>
-         <RouteList setter = {name === 'Setter'} disproutes = {displayRoutes}/>
-      </div>
+				<RouteList setter = {name === 'Setter'} disproutes = {displayRoutes}/>
+			</div>
 		</div>
 	)
 }

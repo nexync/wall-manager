@@ -27,7 +27,6 @@ export const Header = ({setter, sortfunc}) => {
 		</Menu>
 		);
 
-
    return (
 		<>
 			{setter === true ? 

@@ -42,8 +42,8 @@ body {
 .image {
 	margin-top: 100px;
 	margin-bottom: 50px;
-  width: 150px;
-  padding: 20px;
+  width: 125px;
+  padding: 0px;
 }
 
 .input-label {
