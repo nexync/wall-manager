@@ -37,6 +37,16 @@ const AppReducer = (state,action) => {
 				currUser: action.payload,
 				error: null
 			}
+		case 'GET_COMMENTS':
+			return {
+				...state,
+				comments: action.payload
+			}
+		case 'ADD_COMMENTS':
+			return {
+				...state,
+				comments: [...state.comments, action.payload]
+			}
 		case 'ERROR':
 			console.log(action.payload)
 			return {

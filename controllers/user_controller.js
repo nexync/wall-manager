@@ -96,8 +96,8 @@ exports.loginUser = async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			token,
-			user: {
-				id: user._uid,
+			data: {
+				id: user._id,
 				displayname: user.displayname
 			}
 		})
@@ -114,7 +114,7 @@ exports.deleteUser = async (req, res) => {
 		const deletedUser = await User.findByIdAndDelete(req.user);
 		return res.status(200).json({
 			success: true,
-			deletedUser
+			data: deletedUser
 		})
 	} catch (err) {
 		return res.status(500).json({
@@ -148,9 +148,24 @@ exports.getUserInfo = async (req, res) => {
 	const user = await User.findById(req.user);
 	return res.status(200).json({
 		success: true,
-		user: {
+		data: {
 			displayname: user.displayname,
 			id: user._id
 		}
 	})
+}
+
+exports.getUsers = async (req, res) => {
+	try {
+		const users = await User.find();
+		return res.status(200).json({
+			success: true,
+			data: users
+		})
+	} catch (err) {
+		return res.status(500).json({
+			success: false,
+			error: err.message
+		})
+	}
 }

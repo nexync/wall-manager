@@ -1,18 +1,30 @@
-import React, {useEffect, useContext} from 'react'
+import React, { useContext, useState } from 'react'
 
-import {Comment} from './Comment'
+import {CommentList} from './CommentList'
+
+import {Button, Form, Input} from 'antd'
+import { CloseOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
-import {Button, List} from 'antd'
-import { CloseOutlined } from '@ant-design/icons';
-
 export const Details = ({close, route}) => {
-	const {comments} = useContext(GlobalContext)
+	const {currUser, getComments, addComment} = useContext(GlobalContext)
+	const [comment, setComment] = useState("");
+	const postComment = async () => {
+		if (comment !== "") {
+			const newComment = {
+				createdBy: currUser.user.id,
+				route: route._id,
+				text: comment,
+			}
+			await addComment(newComment)
+			await getComments(route._id)
+			setComment("")
+		}
+	}
 
 	if (route === null) {
 		return (<></>)
 	}
-
 	
 	return (
 		<div className = 'route-details'>
@@ -29,14 +41,24 @@ export const Details = ({close, route}) => {
 			<div className = 'comment-label'>
 				Comments
 			</div>
-			<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
-			dataSource = {comments} 
-			renderItem={comment => (
-			<List.Item>
-					<Comment key = {comment._id} route={comment} />
-			</List.Item> 
-			)}
-		/>
+			<div>
+				<CommentList route_id = {route._id}/>
+			</div>
+			<div>
+				<Form onFinish = {postComment}>
+					<Input 
+						type = 'text'
+						placeholder = {'Enter Comment Here'}
+						onChange = {(e) => setComment(e.target.value)}
+						value = {comment}
+					/>
+					<Button
+						htmlType = 'submit'
+					>
+						Send
+					</Button>
+				</Form>
+			</div>
 		</div>
 	)
 }

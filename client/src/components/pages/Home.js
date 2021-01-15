@@ -5,12 +5,13 @@ import logo from '../../assets/logo.png'
 import { GlobalContext } from '../../context/GlobalState'
 
 export default function Home() {
-	const {check, getRoutes, login} = useContext(GlobalContext)
+	const {check, getRoutes, getUsers, login} = useContext(GlobalContext)
 	const history = useHistory();
 
 	useEffect(() => {
 		const asyncwrapper = async () => {
 			await getRoutes();
+			await getUsers();
 			const logincheck = await check();
 			if (logincheck)	history.push('/dashboard');
 		}

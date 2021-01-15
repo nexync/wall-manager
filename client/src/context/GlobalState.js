@@ -5,6 +5,7 @@ import axios from 'axios'
 //Initial State
 const initialState = {
 	routes: [],
+	users: {},
 	comments: [],
 	error: null,
 	loading: true,
@@ -108,13 +109,29 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 
+	async function getUsers() {
+		try {
+			const users = await axios.get('/api/')
+			const userdict = users.data.data.reduce((userdict, user) => ({...userdict, [user._id]: user.displayname}), {})
+			dispatch({
+				type: 'GET_USERS',
+				payload: userdict
+			})
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data.error			
+			})
+		}
+	}
+
 	async function register(newuser) {
 		try {
 			const {email, password} = newuser;
 			await axios.post('/api/register', newuser);
 
 			const loginRes = await axios.post('/api/login', {email, password});
-			const user = {token: loginRes.data.token, user: loginRes.data.user}
+			const user = {token: loginRes.data.token, user: loginRes.data.data}
 			localStorage.setItem('auth-token', loginRes.data.token);
 			console.log('User logged in and registered');
 			dispatch({
@@ -134,7 +151,8 @@ export const GlobalProvider = ({children}) => {
 	async function login({email, password}) {
 		try {
 			const loginRes = await axios.post('/api/login', {email, password});
-			const user = {token: loginRes.data.token, user: loginRes.data.user}
+			const user = {token: loginRes.data.token, user: loginRes.data.data}
+			console.log(user)
 			localStorage.setItem('auth-token', loginRes.data.token);
 			dispatch({
 				type: 'LOGIN_USER',
@@ -169,8 +187,8 @@ export const GlobalProvider = ({children}) => {
 
 			const tokenRes = await axios.post('/api/token', null, {headers: {'x-auth-token': token }})
 			if (tokenRes.data) {
-				const userRes = await axios.get('/api/', {headers: {'x-auth-token': token}});
-				const user = {token: token, user: userRes.data.user}
+				const userRes = await axios.get('/api/profile', {headers: {'x-auth-token': token}});
+				const user = {token: token, user: userRes.data.data}
 				console.log(user);
 				dispatch({
 					type: 'LOGIN_USER',
@@ -188,12 +206,14 @@ export const GlobalProvider = ({children}) => {
 		}	
 	}
 
-	async function getComments({route_id}) {
+	async function getComments(route_id) {
 		try {
-			const res = await axios.get('/api/comments', route_id);
+			const res = await axios.get('/api/comments');
+			const dispcomments = res.data.data.filter(comment => comment.route === route_id)
+			console.log(dispcomments)
 			dispatch({
 				type: 'GET_COMMENTS',
-				payload: res.data.data
+				payload: dispcomments
 			})
 		} catch (err) {
 			dispatch({
@@ -203,7 +223,8 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 
-	async function addComment({comment}) {
+	async function addComment(comment) {
+		console.log(comment);
 		const config = {
 			headers: {
 				'Content-Type': 'application/json'
@@ -223,9 +244,6 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 
-	
-
-
 	return(<GlobalContext.Provider value = 
 		{{
 			routes: state.routes,
@@ -244,6 +262,8 @@ export const GlobalProvider = ({children}) => {
 			comments: state.comments,
 			getComments,
 			addComment,
+			users: state.users,
+			getUsers,
 		}}>
 		{children}
 	</GlobalContext.Provider>);
