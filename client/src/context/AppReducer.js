@@ -10,7 +10,7 @@ const AppReducer = (state,action) => {
 		case 'ADD_ROUTE':
 			return {
 				...state,
-				routes: [...state.routes, action.payload]
+				routes: [action.payload, ...state.routes]
 			}
 		case 'EDIT_ROUTE_STATE':
 			[route] = state.routes.filter((r) => r._id === action.payload.id);

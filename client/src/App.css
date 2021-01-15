@@ -14,13 +14,14 @@ body {
 
 .container {
    margin: 30px auto;
-   width: 500px;
+	 width: 1500px;
    font-family: 'Lato', sans-serif;
 }
 
 .header {
 	width: 500px;
-	margin: 50px auto;
+	margin-top: 0px;
+	margin-bottom: 30px;
 	font-family: 'Lato', sans-serif;
 }
 
@@ -40,7 +41,7 @@ body {
 }
 
 .image {
-	margin-top: 100px;
+	margin-top: 50px;
 	margin-bottom: 50px;
   width: 125px;
   padding: 0px;
@@ -74,6 +75,16 @@ body {
 	display: flex
 }
 
+.data-label {
+	font-size: 24px;
+	margin: 50px auto
+}
+
+.route-count {
+	font-size: 18px;
+	margin: 50px auto
+}
+
 .bar-graph{
 	width: 600px;
 	height: 300px;
@@ -90,6 +101,23 @@ body {
 	font-size: 18px;
 	text-align: center;
 	margin: 30px auto;
+}
+
+.route-details {
+	background-color: aliceblue;
+	color: #333333
+}
+
+.route-details .title {
+	font-size: 23px;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.route-details .comment-label {
+	font-size: 16px;
+	padding: 10px;
 }
 
 @media only screen and (max-device-width: 480px) {

@@ -7,7 +7,7 @@ import {Card, Row, Col, Button} from 'antd';
 import { ColorPicker } from './ColorPicker';
 
 
-export const Route = ({route}) => {
+export const Route = ({route, selectRoute}) => {
 	const {editRouteState, deleteRoute} = useContext(GlobalContext)
 	let color;
 	if (route.editable === -1) {
@@ -17,7 +17,7 @@ export const Route = ({route}) => {
 			hoverable 
 			bodyStyle = {{padding: "2px", fontSize: "14px", textAlign: "center"}}
 			headStyle = {window.innerWidth <= 480 ? {fontSize: "16px", textAlign: "center"} : {fontSize: "18px", textAlign: "center"}} 
-			style = {{width: '100%'}}
+			style = {{width: '100%', backgroundColor: 'aliceblue', color: '#333333'}}
 		>
 			<Row align = {"middle"}>
 				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => deleteRoute(route._id)}>Yes, erase it forever.</Button></Col>
@@ -31,6 +31,9 @@ export const Route = ({route}) => {
 	switch (route.color) {
 		case "Green":
 			color = "#008000"
+			break
+		case "Orange":
+			color = "#ffa500"
 			break
 		case "Red":
 			color = "#FF0000"
@@ -51,7 +54,13 @@ export const Route = ({route}) => {
 			color = "#000000"
 			break;
 		case "Grey":
-			color = "#e3e3de3"
+			color = "#808080"
+			break;
+		case "Lime Green":
+			color = "#32cd32"
+			break;
+		case "Tan":
+			color = "#d2b48c"
 			break;
 		default:
 				color = "#FFFFFF"
@@ -79,7 +88,12 @@ export const Route = ({route}) => {
 			hoverable 
 			bodyStyle = {window.innerWidth <= 480 ? {padding: "2px", fontSize: "12px", textAlign: "center"}: {padding: "2px", fontSize: "14px", textAlign: "center"}} 
 			headStyle = {window.innerWidth <= 480 ? {fontSize: "16px",borderRight: `3px solid ${color}` } : {fontSize: "18px",borderRight: `5px solid ${color}` }} 
-			style = {{width: '100%'}}
+			style = {{width: '100%', backgroundColor: 'aliceblue', color: '#333333'}}
+			onClick = {() => {
+				try {
+					selectRoute(route)
+				} catch(err) {}
+			}}
 		>
 			<Row align = {"middle"}>
 				<Col span={8}>{setter}</Col>

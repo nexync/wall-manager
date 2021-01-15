@@ -8,13 +8,18 @@ import {BreakdownSetter} from '../layout/BreakdownSetter'
 import {Button} from 'antd'
 
 export default function Data() {
-	const {currUser} = useContext(GlobalContext)
+	const {currUser, routes} = useContext(GlobalContext)
 	const history = useHistory();
 	if (currUser === null) {
 		history.push('/dashboard')
 	}
 	return (
 		<>
+			<div align = 'center' className = 'data-label'>Route Data</div>
+			<div align = 'center' className = 'route-count'>
+				Total Routes on Wall: {routes.length}
+			</div>
+			
 			<div className = 'bar-graph'>
 				<BreakdownGrade/>
 			</div>

@@ -1,7 +1,9 @@
 const express = require('express');
+const { get } = require('mongoose');
 const router = express.Router();
 const { getRoutes, addRoute, deleteRoute, updateRoute } = require('../controllers/route_controller');
 const { addUser, loginUser, checkToken, deleteUser, getUserInfo } = require('../controllers/user_controller');
+const { addComment, getComments } = require('../controllers/comment_controller')
 const auth = require('../middleware/auth')
 
 router
@@ -31,5 +33,10 @@ router
 
 router
 	.get('/', auth, getUserInfo)
+
+router
+	.route('/comments')
+	.get(getComments)
+	.post(addComment)
 
 module.exports = router;

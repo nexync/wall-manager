@@ -5,6 +5,7 @@ import axios from 'axios'
 //Initial State
 const initialState = {
 	routes: [],
+	comments: [],
 	error: null,
 	loading: true,
 	currUser: null,
@@ -54,7 +55,6 @@ export const GlobalProvider = ({children}) => {
 	}
 	
 	async function editRouteState(route, id, newState) {
-		console.log(route);
 		if (route.editable === 1 && newState === 'delete')	return;
 		if (route.editable === -1 && newState === 'edit')	return;
 		
@@ -185,9 +185,46 @@ export const GlobalProvider = ({children}) => {
 				payload: err.response.data.error			
 			})
 			return false;
-		}
-		
+		}	
 	}
+
+	async function getComments({route_id}) {
+		try {
+			const res = await axios.get('/api/comments', route_id);
+			dispatch({
+				type: 'GET_COMMENTS',
+				payload: res.data.data
+			})
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data				
+			})
+		}
+	}
+
+	async function addComment({comment}) {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}
+		try {
+			const res = await axios.post('/api/comments', comment, config)
+			dispatch({
+				type: 'ADD_COMMENT',
+				payload: res.data.data,
+			})
+		} catch(err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data				
+			})
+		}
+	}
+
+	
+
 
 	return(<GlobalContext.Provider value = 
 		{{
@@ -204,6 +241,9 @@ export const GlobalProvider = ({children}) => {
 			login,
 			logout,
 			check,
+			comments: state.comments,
+			getComments,
+			addComment,
 		}}>
 		{children}
 	</GlobalContext.Provider>);
