@@ -26,7 +26,7 @@ body {
 }
 
 .header .text{
-   font-size: 1.5rem;
+	 font-size: 1.5rem;
    font-family: 'Lato', sans-serif;
 }
 
@@ -145,15 +145,16 @@ body {
 @media only screen and (max-device-width: 480px) {
 	.header {
 		width: 300px;
-		margin: 30px auto;
+		margin: 0px auto 30px auto;
 	}
 
 	.header .text{
 		font-size: 1.3rem;
- }
+		color: #ffffff;
+ 	}
 
- .container {
-	width: 300px;
+ 	.container {
+		width: 300px;
 	}
 
 	.bar-graph{

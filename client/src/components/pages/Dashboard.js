@@ -9,14 +9,16 @@ import { GlobalContext } from '../../context/GlobalState';
 
 import comparator from '../comp'
 
-import {Button, Row, Col} from 'antd'
+import {Button, Row, Col, Tabs} from 'antd'
 
 export default function Dashboard() {
 	const {currUser, routes} = useContext(GlobalContext)
 	const [routeDetail, setRouteDetail] = useState(null);
+	const [activeKey, setActiveKey] = useState("1");
 	const history = useHistory();
 	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"dateu")))
 
+	const {TabPane} = Tabs;
 	let name;
 	if (currUser === null) {
 		name = "User"	
@@ -37,6 +39,10 @@ export default function Dashboard() {
 			behavior: 'smooth'
 		})
 		setRouteDetail(route);
+		if (window.innerWidth <= 480) {
+			if (route != null)	setActiveKey("2");
+			else	setActiveKey("1")
+		}
 	}
 	
 	return (
@@ -57,7 +63,7 @@ export default function Dashboard() {
 						</Row>
 				</div>		
 			</div>
-			<Row className = 'container'>
+			{window.innerWidth > 480 ? <Row className = 'container'>
 				<Col offset = {2} span = {8}>
 					<div className = 'header'> 
 						<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
@@ -67,7 +73,21 @@ export default function Dashboard() {
 					</div>
 				</Col>
 				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/></Col>
-			</Row>
+			</Row> :
+				<Tabs defaultActiveKey = "1" className = 'container' activeKey = {activeKey}>
+					<TabPane tab = "" key = "1">
+						<div className = 'header'> 
+							<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
+						</div>
+						<div >
+							<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes}/>
+						</div>
+					</TabPane>
+					<TabPane tab = "" key = "2">
+					<Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/>
+					</TabPane>
+				</Tabs>
+			}
 		</div>
 	)
 }

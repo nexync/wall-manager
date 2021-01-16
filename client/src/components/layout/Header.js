@@ -35,8 +35,8 @@ export const Header = ({setter, sortfunc}) => {
 					<Col span = {1}><AddRoute/></Col>
 				</Row> :
 				<Row>
-				<Col span = {20}><label className = 'text'>Route List</label></Col>
-				<Col span = {4}>
+				<Col span = { window.innerWidth > 480 ? 20 : 18}><label className = 'text'>Route List</label></Col>
+				<Col span = { window.innerWidth > 480 ? 4 : 6}>
 					<Dropdown overlay={menu} placement="bottomCenter">
 						<Button ghost = {true} block = {true}>Sort</Button>
 					</Dropdown>
