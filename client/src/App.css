@@ -137,8 +137,8 @@ body {
 }
 
 .route-details button {
-  border:1px solid blue;
-  background:blue;
+  border:1px #1DA1F2;
+  background:#1DA1F2;
   color:white;
 }
 

@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import {CommentList} from './CommentList'
 
 import {Button, Input} from 'antd'
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, SendOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 export const Details = ({guest, close, route}) => {
@@ -58,9 +58,8 @@ export const Details = ({guest, close, route}) => {
 						<Button
 							htmlType = 'submit'
 							bordered = 'false'
-						>
-							Send
-						</Button>
+							icon={<SendOutlined/>}
+						/>
 					</form>
 				</div> : 
 				<div align = 'center' style = {{padding: 10}}>

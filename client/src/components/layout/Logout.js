@@ -12,7 +12,7 @@ export const Logout = () => {
 	}
 	return (
 		<div>
-			<Button onClick = {handleClick}>Logout</Button>
+			<Button ghost = 'true' onClick = {handleClick}>Logout</Button>
 		</div>
 	)
 }

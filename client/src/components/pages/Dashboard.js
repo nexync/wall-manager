@@ -41,10 +41,21 @@ export default function Dashboard() {
 	
 	return (
 		<div>
-			<div>
-				Hello {name}
-				<Logout/>
-				{name === 'Setter' ? <Button onClick = {() => history.push('/data')}>Route Data</Button> : null}
+			<div style = {{display: "flex", flexDirection: 'row', justifyContent: 'space-between'}}>
+				<div style = {{width: 100, fontSize: 16, padding: 10}}>Hello {name}</div>
+				<div align = 'right' style = {{width: 300, padding: 10}}>
+						<Row>
+							<Col span = {8}>
+								{name === 'Setter' ? <Button ghost = 'true' onClick = {() => history.push('/data')}>Route Data</Button> : null}
+							</Col>
+							<Col span = {8}>
+								{name !== 'Setter' && name !== 'Guest' ?  <Button ghost = 'true' onClick = {() => history.push('/profile')}>Profile</Button> : null}
+							</Col>
+							<Col span = {8}>
+								<Logout/>
+							</Col>
+						</Row>
+				</div>		
 			</div>
 			<Row className = 'container'>
 				<Col offset = {2} span = {8}>
