@@ -2,14 +2,16 @@ import React, { useContext, useState } from 'react'
 
 import {CommentList} from './CommentList'
 
-import {Button, Form, Input} from 'antd'
+import {Button, Input} from 'antd'
 import { CloseOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
-export const Details = ({close, route}) => {
+export const Details = ({guest, close, route}) => {
 	const {currUser, getComments, addComment} = useContext(GlobalContext)
 	const [comment, setComment] = useState("");
-	const postComment = async () => {
+	
+	const postComment = async (e) => {
+		e.preventDefault()
 		if (comment !== "") {
 			const newComment = {
 				createdBy: currUser.user.id,
@@ -21,7 +23,6 @@ export const Details = ({close, route}) => {
 			setComment("")
 		}
 	}
-
 	if (route === null) {
 		return (<></>)
 	}
@@ -44,21 +45,29 @@ export const Details = ({close, route}) => {
 			<div>
 				<CommentList route_id = {route._id}/>
 			</div>
-			<div>
-				<Form onFinish = {postComment}>
-					<Input 
-						type = 'text'
-						placeholder = {'Enter Comment Here'}
-						onChange = {(e) => setComment(e.target.value)}
-						value = {comment}
-					/>
-					<Button
-						htmlType = 'submit'
-					>
-						Send
-					</Button>
-				</Form>
-			</div>
+			{guest !== true ? 
+				<div>
+					<form onSubmit = {(e) => postComment(e)}>
+						<Input 
+							type = 'text'
+							placeholder = {'Enter Comment Here'}
+							onChange = {(e) => setComment(e.target.value)}
+							bordered = {false}
+							value = {comment}
+						/>
+						<Button
+							htmlType = 'submit'
+							bordered = 'false'
+						>
+							Send
+						</Button>
+					</form>
+				</div> : 
+				<div align = 'center' style = {{padding: 10}}>
+					Log in to leave a comment.
+				</div>
+			}
+			
 		</div>
 	)
 }

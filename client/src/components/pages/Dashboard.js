@@ -55,7 +55,7 @@ export default function Dashboard() {
 						<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes}/>
 					</div>
 				</Col>
-				<Col offset = {4} span = {8}><Details close = {setDetail} route = {routeDetail}/></Col>
+				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/></Col>
 			</Row>
 		</div>
 	)

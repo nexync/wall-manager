@@ -31,6 +31,11 @@ const AppReducer = (state,action) => {
 				...state,
 				routes: state.routes.filter(route => route._id !== action.payload)
 			}
+		case 'GET_USERS':
+			return {
+				...state,
+				users: action.payload
+			}
 		case 'LOGIN_USER':		
 			return {
 				...state,

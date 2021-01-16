@@ -120,6 +120,28 @@ body {
 	padding: 10px;
 }
 
+.route-details form {
+  display:flex;
+  flex-direction:row;
+  border:1px solid grey;
+  padding:2px;
+}
+
+.route-details form input {
+  flex-grow:2;
+  border:none;
+}
+
+.route-details input:focus {
+  outline: none;
+}
+
+.route-details button {
+  border:1px solid blue;
+  background:blue;
+  color:white;
+}
+
 @media only screen and (max-device-width: 480px) {
 	.header {
 		width: 300px;

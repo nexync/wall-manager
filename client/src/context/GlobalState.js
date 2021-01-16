@@ -112,7 +112,7 @@ export const GlobalProvider = ({children}) => {
 	async function getUsers() {
 		try {
 			const users = await axios.get('/api/')
-			const userdict = users.data.data.reduce((userdict, user) => ({...userdict, [user._id]: user.displayname}), {})
+			const userdict = users.data.data.reduce((userdict, user) => ({...userdict, [user._id]: {displayname: user.displayname}}), {})
 			dispatch({
 				type: 'GET_USERS',
 				payload: userdict
