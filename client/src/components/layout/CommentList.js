@@ -15,13 +15,13 @@ export const CommentList = ({route_id}) => {
 	}, [route_id])
 
 	return (
-		<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
+		comments.length > 0 ? <List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
 			dataSource = {comments} 
 			renderItem={comment => (
-				<List.Item>
+				<List.Item style = {{marginBottom: 0}}>
 						<Comment key = {comment._id} comment={comment} />
 				</List.Item> 
 			)}
-		/>
+		/> : <div align = 'center' style = {{paddingBottom: 10}}> Add the first comment!</div>
 	)
 }
