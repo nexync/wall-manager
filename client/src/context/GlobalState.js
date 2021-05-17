@@ -210,7 +210,6 @@ export const GlobalProvider = ({children}) => {
 		try {
 			const res = await axios.get('/api/comments');
 			const dispcomments = res.data.data.filter(comment => comment.route === route_id)
-			console.log(dispcomments)
 			dispatch({
 				type: 'GET_COMMENTS',
 				payload: dispcomments
@@ -224,7 +223,6 @@ export const GlobalProvider = ({children}) => {
 	}
 
 	async function addComment(comment) {
-		console.log(comment);
 		const config = {
 			headers: {
 				'Content-Type': 'application/json'
@@ -237,6 +235,21 @@ export const GlobalProvider = ({children}) => {
 				payload: res.data.data,
 			})
 		} catch(err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data				
+			})
+		}
+	}
+
+	async function deleteComment(id) {
+		try {
+			await axios.delete(`/api/comments${id}`);
+			dispatch({
+				type: 'DELETE_COMMENT',
+				payload: id,
+			})
+		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
@@ -262,6 +275,7 @@ export const GlobalProvider = ({children}) => {
 			comments: state.comments,
 			getComments,
 			addComment,
+			deleteComment,
 			users: state.users,
 			getUsers,
 		}}>

@@ -7,7 +7,7 @@ import { CloseOutlined, SendOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 export const Details = ({guest, close, route}) => {
-	const {currUser, getComments, addComment} = useContext(GlobalContext)
+	const {currUser, getComments, addComment, deleteComment} = useContext(GlobalContext)
 	const [comment, setComment] = useState("");
 	
 	const postComment = async (e) => {
@@ -23,6 +23,12 @@ export const Details = ({guest, close, route}) => {
 			setComment("")
 		}
 	}
+
+	const delComment = async (id) => {
+		await deleteComment(id)
+		await getComments(route._id)
+	}
+
 	if (route === null) {
 		return (<></>)
 	}
@@ -43,7 +49,7 @@ export const Details = ({guest, close, route}) => {
 				Comments
 			</div>
 			<div>
-				<CommentList route_id = {route._id}/>
+				<CommentList route_id = {route._id} del = {delComment}/>
 			</div>
 			{guest !== true ? 
 				<div>

@@ -52,6 +52,11 @@ const AppReducer = (state,action) => {
 				...state,
 				comments: [...state.comments, action.payload]
 			}
+		case 'DELETE_COMMENTS':
+			return {
+				...state,
+				comments: state.comments.filter(comment => comment._id !== action.payload)
+			}
 		case 'ERROR':
 			console.log(action.payload)
 			return {
