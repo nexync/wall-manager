@@ -6,6 +6,8 @@ import { GradeAdjust } from './GradeAdjust';
 import {Card, Row, Col, Button} from 'antd';
 import { ColorPicker } from './ColorPicker';
 
+import {CaretUpOutlined} from '@ant-design/icons';
+
 
 export const Route = ({route, selectRoute}) => {
 	const {editRouteState, deleteRoute} = useContext(GlobalContext)
@@ -79,7 +81,17 @@ export const Route = ({route, selectRoute}) => {
 	let colorp = editable ? <ColorPicker id = {route._id}/> : null
 
 	return (
-		<Card size = "small"
+		<Row>
+			<Col span = {2} style = {{color: 'orange'}}>
+				<div>
+					<Button style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
+				</div>
+				<div align = 'center' style = {{fontSize: 20}}>
+					{route.rating}
+				</div>
+			</Col>
+			<Col span = {22}>
+			<Card size = "small"
 			title = {<Row align = "middle"> 
 					<Col span = {14}>{name}</Col>
 					<Col span = {4}>{colorp}</Col>
@@ -101,5 +113,8 @@ export const Route = ({route, selectRoute}) => {
 				<Col span={8}>{wall}</Col>
 			</Row>
 	</Card>
+			</Col>
+		</Row>
+		
 	)
 }
