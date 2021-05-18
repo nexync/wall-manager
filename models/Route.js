@@ -28,6 +28,10 @@ const RouteSchema = new mongoose.Schema({
 	},
 	color: {
 		type: String,
+	},
+	rating: {
+		type: Number,
+		default: 0
 	}
 })
 

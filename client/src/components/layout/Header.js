@@ -1,19 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {AddRoute} from './AddRoute'
 
 import { Row, Col, Button, Menu, Dropdown } from 'antd'
+import {UpOutlined, DownOutlined} from '@ant-design/icons';
 
-export const Header = ({setter, sortfunc}) => {
-	const values = ['dateu','dated','grade', 'name', 'wall']
+export const Header = ({setter, sortfunc, reverse}) => {
+	const values = ['dateu','grade', 'name', 'wall']
+	const [up, setUp] = useState(true);
+
+	const rev = () => {
+		reverse()
+		setUp(!up)
+	}
 	const menu = (
 		<Menu onClick = {(e) => {
-				sortfunc(values[e.key.slice(-1)])
+				if (!up)
+					sortfunc(values[e.key.slice(-1)], true)
+				else {
+					sortfunc(values[e.key.slice(-1)], false)
+				}
 			}}>
 				<Menu.Item>
-					Date (Recent)
-				</Menu.Item>
-				<Menu.Item>
-					Date (Latest)
+					Date
 				</Menu.Item>
 				<Menu.Item>
 					Grade
@@ -35,11 +43,14 @@ export const Header = ({setter, sortfunc}) => {
 					<Col span = {1}><AddRoute/></Col>
 				</Row> :
 				<Row>
-				<Col span = { window.innerWidth > 480 ? 20 : 18}><label className = 'text'>Route List</label></Col>
+				<Col span = { window.innerWidth > 480 ? 17 : 16}><label className = 'text'>Route List</label></Col>
 				<Col span = { window.innerWidth > 480 ? 4 : 6}>
 					<Dropdown overlay={menu} placement="bottomCenter">
 						<Button ghost = {true} block = {true}>Sort</Button>
 					</Dropdown>
+				</Col>
+				<Col offset = {1} span = { window.innerWidth > 480 ? 2 : 2}>
+					<Button ghost = {true} block = {true} icon = {up === false ? <DownOutlined/> : <UpOutlined/>} onClick = {rev}/>
 				</Col>
 			</Row>
 			}  

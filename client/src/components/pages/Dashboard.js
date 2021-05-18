@@ -28,8 +28,16 @@ export default function Dashboard() {
 		name = currUser.user.displayname;
 	}
 
-	const sortfunc = (field) => {
-		setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,field)));
+	const sortfunc = (field, flip) => {
+		if (!flip)
+			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,field)));
+		else {
+			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,field)).reverse());
+		}
+	}
+
+	const reversesort = () => {
+		setDisplayRoutes(displayRoutes.slice().reverse())
 	}
 
 	const setDetail = (route) => {
@@ -66,7 +74,7 @@ export default function Dashboard() {
 			{window.innerWidth > 480 ? <Row className = 'container'>
 				<Col offset = {2} span = {8}>
 					<div className = 'header'> 
-						<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
+						<Header setter = {name === 'Setter'} sortfunc = {sortfunc} reverse = {reversesort}/>
 					</div>
 					<div >
 						<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes}/>

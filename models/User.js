@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
 	displayname: {
 		type: String,
 	},
+	upvoted: {
+		type: Array,
+		default: []
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now()
