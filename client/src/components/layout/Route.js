@@ -10,7 +10,7 @@ import {CaretUpOutlined} from '@ant-design/icons';
 
 
 export const Route = ({route, selectRoute}) => {
-	const {editRouteState, deleteRoute} = useContext(GlobalContext)
+	const {editRouteState, deleteRoute, currUser} = useContext(GlobalContext)
 	let color;
 	if (route.editable === -1) {
 		return (

@@ -29,7 +29,8 @@ const AppReducer = (state,action) => {
 		case 'DELETE_ROUTE':
 			return {
 				...state,
-				routes: state.routes.filter(route => route._id !== action.payload)
+				routes: state.routes.filter(route => route._id !== action.payload),
+				comments: state.comments.filter(comment => comment.route !== action.payload)
 			}
 		case 'GET_USERS':
 			return {
