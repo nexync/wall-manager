@@ -169,3 +169,23 @@ exports.getUsers = async (req, res) => {
 		})
 	}
 }
+
+exports.upvote = async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id);
+		const {route} = req.body;
+		console.log(user)
+		user.upvoted.push(route);
+		user.save()
+		console.log(user)
+		return res.status(200).json({
+			success: true,
+			data: user
+	 })
+	} catch (err) {
+		return res.status(500).json({
+			success: false,
+			error: err.message
+		})
+	}
+}

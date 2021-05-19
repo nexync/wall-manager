@@ -2,12 +2,25 @@ import React, {useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 import {Route} from './Route'
 
-import {List, Row, Col} from 'antd'
+import {List, Row, Col, Button} from 'antd'
 import { EditRoute } from './EditRoute';
 import { DeleteRoute } from './DeleteRoute';
 
+import {CaretUpOutlined} from '@ant-design/icons';
+
+
 export const RouteList = ({selectRoute, setter, disproutes}) => {
-	const {routes} = useContext(GlobalContext)
+	const {routes, currUser, upvote} = useContext(GlobalContext)
+
+	const upvoteWrapper =  (routeid) => {
+		console.log(currUser.user._id)
+		console.log('upvoted')
+		const request = {
+			_id: currUser.user._id,
+			route: routeid
+		}
+		upvote(request);
+	}
 	return (
 		<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
 			dataSource = {setter === true ? routes : disproutes} 
@@ -18,7 +31,19 @@ export const RouteList = ({selectRoute, setter, disproutes}) => {
 						<Col span = {22}> <Route key = {route._id} route={route} /> </Col>
 						<Col offset = {1} span={1}><EditRoute id={route._id} newState = {'edit'}/> <DeleteRoute id={route._id} newState = {'delete'}/></Col>
 					</Row> :
-					<Route key = {route._id} route={route} selectRoute = {selectRoute}/>
+					<Row>
+						<Col span = {2} style = {{color: 'orange'}}>
+							<div>
+								<Button onClick = {upvoteWrapper} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
+							</div>
+							<div align = 'center' style = {{fontSize: 20}}>
+								{route.rating}
+							</div>
+						</Col>
+						<Col span = {22}>
+							<Route key = {route._id} route={route} selectRoute = {selectRoute}/>
+						</Col>
+					</Row>
 				}
 			</List.Item> 
 			)}

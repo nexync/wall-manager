@@ -257,6 +257,24 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 
+	async function upvote(request) {
+		try {
+			console.log(request)
+			const config = {
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}
+			await axios.put(`/api/comments`, request, config);
+
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data				
+			})
+		}
+	}
+
 	return(<GlobalContext.Provider value = 
 		{{
 			routes: state.routes,
@@ -278,6 +296,7 @@ export const GlobalProvider = ({children}) => {
 			deleteComment,
 			users: state.users,
 			getUsers,
+			upvote,
 		}}>
 		{children}
 	</GlobalContext.Provider>);

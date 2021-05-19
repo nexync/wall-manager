@@ -2,7 +2,7 @@ const express = require('express');
 const { get } = require('mongoose');
 const router = express.Router();
 const { getRoutes, addRoute, deleteRoute, updateRoute } = require('../controllers/route_controller');
-const { addUser, loginUser, checkToken, deleteUser, getUserInfo, getUsers } = require('../controllers/user_controller');
+const { addUser, loginUser, checkToken, deleteUser, getUserInfo, getUsers, upvote } = require('../controllers/user_controller');
 const { addComment, getComments, deleteComment } = require('../controllers/comment_controller')
 const auth = require('../middleware/auth')
 
@@ -41,6 +41,7 @@ router
 	.route('/comments')
 	.get(getComments)
 	.post(addComment)
+	.put(upvote)
 
 router
 	.route('/comments:id')
