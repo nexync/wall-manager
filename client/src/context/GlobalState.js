@@ -265,7 +265,11 @@ export const GlobalProvider = ({children}) => {
 					'Content-Type': 'application/json'
 				}
 			}
-			await axios.put(`/api/comments`, request, config);
+			const res = await axios.put(`/api/profile${request._id}`, request, config);
+			dispatch({
+				type: 'UPVOTE',
+				payload: res
+			})
 
 		} catch (err) {
 			dispatch({

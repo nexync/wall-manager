@@ -12,14 +12,18 @@ import {CaretUpOutlined} from '@ant-design/icons';
 export const RouteList = ({selectRoute, setter, disproutes}) => {
 	const {routes, currUser, upvote} = useContext(GlobalContext)
 
-	const upvoteWrapper =  (routeid) => {
-		console.log(currUser.user._id)
-		console.log('upvoted')
-		const request = {
-			_id: currUser.user._id,
-			route: routeid
+	const upvoteWrapper = (routeid) => {
+		try {
+			console.log(routeid)
+			console.log('upvoted')
+			const request = {
+				_id: currUser.user.id,
+				route: routeid
+			}
+			//upvote(request);
+		} catch (err) {
+			
 		}
-		upvote(request);
 	}
 	return (
 		<List grid = {{gutter: 10, column: 1}} style = {{padding: 0, margin: 0}} 
@@ -34,7 +38,7 @@ export const RouteList = ({selectRoute, setter, disproutes}) => {
 					<Row>
 						<Col span = {2} style = {{color: 'orange'}}>
 							<div>
-								<Button onClick = {upvoteWrapper} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
+								<Button onClick = {upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
 							</div>
 							<div align = 'center' style = {{fontSize: 20}}>
 								{route.rating}

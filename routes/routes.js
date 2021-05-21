@@ -41,6 +41,9 @@ router
 	.route('/comments')
 	.get(getComments)
 	.post(addComment)
+
+router
+	.route('/profile:id')
 	.put(upvote)
 
 router
