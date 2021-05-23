@@ -1,5 +1,4 @@
 const express = require('express');
-const { get } = require('mongoose');
 const router = express.Router();
 const { getRoutes, addRoute, deleteRoute, updateRoute } = require('../controllers/route_controller');
 const { addUser, loginUser, checkToken, deleteUser, getUserInfo, getUsers, upvote } = require('../controllers/user_controller');

@@ -58,6 +58,19 @@ const AppReducer = (state,action) => {
 				...state,
 				comments: state.comments.filter(comment => comment._id !== action.payload)
 			}
+		case 'UPVOTE':
+			const updateduser = {
+				token: state.currUser.token,
+				user: {
+					id: action.payload.id,
+					displayname: action.payload.displaynam,
+					upvoted: action.payload.upvoted
+				}
+			}
+			return {
+				...state,
+				currUser: updateduser
+			}
 		case 'ERROR':
 			console.log(action.payload)
 			return {

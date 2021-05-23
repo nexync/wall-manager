@@ -98,7 +98,8 @@ exports.loginUser = async (req, res) => {
 			token,
 			data: {
 				id: user._id,
-				displayname: user.displayname
+				displayname: user.displayname,
+				upvoted: user.upvoted
 			}
 		})
 	} catch (err) {
@@ -150,7 +151,8 @@ exports.getUserInfo = async (req, res) => {
 		success: true,
 		data: {
 			displayname: user.displayname,
-			id: user._id
+			id: user._id,
+			upvoted: user.upvoted
 		}
 	})
 }
@@ -173,11 +175,14 @@ exports.getUsers = async (req, res) => {
 exports.upvote = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id);
-		const {route} = req.body;
-		console.log(user)
-		user.upvoted.push(route);
+		const {route, up} = req.body;
+		if (up) {
+			user.upvoted.push(route);
+		}
+		else {
+			user.upvoted.remove(route)
+		}
 		user.save()
-		console.log(user)
 		return res.status(200).json({
 			success: true,
 			data: user

@@ -266,16 +266,23 @@ export const GlobalProvider = ({children}) => {
 				}
 			}
 			const res = await axios.put(`/api/profile${request._id}`, request, config);
-			dispatch({
-				type: 'UPVOTE',
-				payload: res
-			})
-
+			console.log(res.data)
+			if (res.data) {
+				dispatch({
+					type: 'UPVOTE',
+					payload: res.data
+				})
+				return true
+			}
+			else {
+				return false
+			}
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
 			})
+			return false
 		}
 	}
 
