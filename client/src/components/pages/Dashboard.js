@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import {useHistory} from 'react-router-dom'
 
 import {Header} from '../layout/Header';
@@ -12,14 +12,26 @@ import comparator from '../comp'
 import {Button, Row, Col, Tabs} from 'antd'
 
 export default function Dashboard() {
-	const {currUser, routes} = useContext(GlobalContext)
+	const {currUser, routes, upvote} = useContext(GlobalContext)
 	const [routeDetail, setRouteDetail] = useState(null);
 	const [activeKey, setActiveKey] = useState("1");
 	const history = useHistory();
 	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"dateu")))
+	const [sortHist, setSortHist] = useState({field: "dateu", flip: false})
 
 	const {TabPane} = Tabs;
 	let name;
+
+
+	useEffect(() => {
+		if (!sortHist.flip) {
+			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,sortHist.field)));
+		}
+		else {
+			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,sortHist.field)).reverse());
+		}
+	}, [currUser])
+
 	if (currUser === null) {
 		name = "User"	
 		history.push('/')
@@ -28,11 +40,36 @@ export default function Dashboard() {
 		name = currUser.user.displayname;
 	}
 
+	function checkUpvoted(routeid) {
+		let uproutes = [];
+		if (currUser.user.upvoted !== undefined) {
+			uproutes = currUser.user.upvoted
+		}
+		return uproutes.includes(routeid)
+	}
+
+	const upvoteWrapper = (routeid) => {
+		try {
+			const up = checkUpvoted(routeid)
+			const request = {
+				userid: currUser.user.id,
+				routeid: routeid,
+				up: up
+			}
+			upvote(request);
+		} catch (err) {
+			
+		}
+	}
+
 	const sortfunc = (field, flip) => {
-		if (!flip)
+		if (!flip) {
 			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,field)));
+			setSortHist({field: field, flip: false});
+		}
 		else {
 			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,field)).reverse());
+			setSortHist({field: field, flip: true})
 		}
 	}
 
@@ -77,7 +114,14 @@ export default function Dashboard() {
 						<Header setter = {name === 'Setter'} sortfunc = {sortfunc} reverse = {reversesort}/>
 					</div>
 					<div >
-						<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes}/>
+						<RouteList 
+							selectRoute = {setDetail} 
+							guest = {name === 'Guest'} 
+							setter = {name === 'Setter'} 
+							disproutes = {displayRoutes} 
+							upvoteWrapper = {upvoteWrapper} 
+							checkUpvoted = {checkUpvoted}
+						/>
 					</div>
 				</Col>
 				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/></Col>
@@ -88,7 +132,7 @@ export default function Dashboard() {
 							<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
 						</div>
 						<div >
-							<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes}/>
+							<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes} upvoteWrapper = {upvoteWrapper} checkUpvoted = {checkUpvoted}/>
 						</div>
 					</TabPane>
 					<TabPane tab = "" key = "2">

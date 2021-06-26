@@ -175,13 +175,14 @@ exports.getUsers = async (req, res) => {
 exports.upvote = async (req, res) => {
 	try {
 		const user = await User.findById(req.params.id);
-		const {route, up} = req.body;
-		if (up) {
-			user.upvoted.push(route);
+		const {routeid, up} = req.body;
+		if (!up) {
+			user.upvoted.push(routeid);
 		}
 		else {
-			user.upvoted.remove(route)
+			user.upvoted.remove(routeid)
 		}
+		
 		user.save()
 		return res.status(200).json({
 			success: true,

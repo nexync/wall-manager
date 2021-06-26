@@ -10,7 +10,7 @@ const AppReducer = (state,action) => {
 		case 'ADD_ROUTE':
 			return {
 				...state,
-				routes: [action.payload, ...state.routes]
+				routes: [...state.routes, action.payload]
 			}
 		case 'EDIT_ROUTE_STATE':
 			[route] = state.routes.filter((r) => r._id === action.payload.id);
@@ -62,14 +62,15 @@ const AppReducer = (state,action) => {
 			const updateduser = {
 				token: state.currUser.token,
 				user: {
-					id: action.payload.id,
-					displayname: action.payload.displaynam,
-					upvoted: action.payload.upvoted
+					id: action.payload.user._id,
+					displayname: action.payload.user.displayname,
+					upvoted: action.payload.user.upvoted
 				}
 			}
 			return {
 				...state,
-				currUser: updateduser
+				currUser: updateduser,
+				routes: state.routes.map(r => r._id === action.payload.route._id ? action.payload.route : r)
 			}
 		case 'ERROR':
 			console.log(action.payload)

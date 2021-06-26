@@ -4,7 +4,7 @@ import { GlobalContext } from '../../context/GlobalState';
 import { Column } from '@ant-design/charts';
 export const BreakdownGrade = () => {
 	const {routes} = useContext(GlobalContext)
-	const grades = ['5.6','5.7','5.8','5.9','5.10','5.11','5.12'];
+	const grades = ['5.5','5.6','5.7','5.8','5.9','5.10','5.11','5.12'];
 	const types = ["+","","-"];
 
 	let data = []

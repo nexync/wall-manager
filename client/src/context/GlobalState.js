@@ -8,7 +8,7 @@ const initialState = {
 	users: {},
 	comments: [],
 	error: null,
-	loading: true,
+	loading: false,
 	currUser: null,
 }
 
@@ -259,30 +259,38 @@ export const GlobalProvider = ({children}) => {
 
 	async function upvote(request) {
 		try {
-			console.log(request)
+			console.log("from global state", request)
 			const config = {
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			}
-			const res = await axios.put(`/api/profile${request._id}`, request, config);
-			console.log(res.data)
-			if (res.data) {
+			const res_user = await axios.put(`/api/profile${request.userid}`, request, config);
+			const res_route = await axios.put(`/api/dashboard${request.routeid}`, request, config);
+			
+			if (res_user && res_route) {
 				dispatch({
 					type: 'UPVOTE',
-					payload: res.data
+					payload: {
+						user: res_user.data.data,
+						route: res_route.data.data
+					}
 				})
-				return true
+				return true;
 			}
 			else {
-				return false
+				dispatch({
+					type: 'ERROR',
+					payload: 'Failure'				
+				})
+				return false;
 			}
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
 			})
-			return false
+			return false;
 		}
 	}
 
