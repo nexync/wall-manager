@@ -268,29 +268,18 @@ export const GlobalProvider = ({children}) => {
 			const res_user = await axios.put(`/api/profile${request.userid}`, request, config);
 			const res_route = await axios.put(`/api/dashboard${request.routeid}`, request, config);
 			
-			if (res_user && res_route) {
-				dispatch({
-					type: 'UPVOTE',
-					payload: {
-						user: res_user.data.data,
-						route: res_route.data.data
-					}
-				})
-				return true;
-			}
-			else {
-				dispatch({
-					type: 'ERROR',
-					payload: 'Failure'				
-				})
-				return false;
-			}
+			dispatch({
+				type: 'UPVOTE',
+				payload: {
+					user: res_user.data.data,
+					route: res_route.data.data
+				}
+			})
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				
 			})
-			return false;
 		}
 	}
 

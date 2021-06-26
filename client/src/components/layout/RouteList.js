@@ -24,26 +24,39 @@ export const RouteList = ({selectRoute, guest, setter, disproutes, upvoteWrapper
 							<Col offset = {1} span={1}><EditRoute id={route._id} newState = {'edit'}/> <DeleteRoute id={route._id} newState = {'delete'}/></Col>
 						</Row> :
 						(guest === true ? 
-							<Route key = {route._id} route={route} selectRoute = {selectRoute} /> :
 							<Row>
-									{checkUpvoted(route._id) ?  
-									<Col span = {2} style = {{color: 'orange'}}>
-										<div>
-											<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
-										</div>
-										<div align = 'center' style = {{fontSize: 20}}>
-											{route.rating}
-										</div>
-									</Col>  :
+								<Col span = {2} style = {{color: 'aliceblue'}}>
+									<div>
+										<Button style = {{border: 'none', backgroundColor: '#333333', color: 'aliceblue'}} icon = {<CaretUpOutlined/>}/>
+									</div>
+									<div align = 'center' style = {{fontSize: 20}}>
+										{route.rating}
+									</div>
+								</Col>
+								<Col span = {22}>
+									<Route key = {route._id} route={route} selectRoute = {selectRoute} />
+								</Col>
+							</Row>
+							:
+							<Row>
+								{checkUpvoted(route._id) ?  
+								<Col span = {2} style = {{color: 'orange'}}>
+									<div>
+										<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
+									</div>
+									<div align = 'center' style = {{fontSize: 20}}>
+										{route.rating}
+									</div>
+								</Col>  :
 									
-									<Col span = {2} style = {{color: 'aliceblue'}}>
-										<div>
-											<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'aliceblue'}} icon = {<CaretUpOutlined/>}/>
-										</div>
-										<div align = 'center' style = {{fontSize: 20}}>
-											{route.rating}
-										</div>
-									</Col>}
+								<Col span = {2} style = {{color: 'aliceblue'}}>
+									<div>
+										<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'aliceblue'}} icon = {<CaretUpOutlined/>}/>
+									</div>
+									<div align = 'center' style = {{fontSize: 20}}>
+										{route.rating}
+									</div>
+								</Col>}
 								<Col span = {22}>
 									<Route key = {route._id} route={route} selectRoute = {selectRoute} />
 								</Col>
