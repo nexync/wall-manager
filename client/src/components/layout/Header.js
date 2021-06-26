@@ -5,7 +5,7 @@ import { Row, Col, Button, Menu, Dropdown } from 'antd'
 import {UpOutlined, DownOutlined} from '@ant-design/icons';
 
 export const Header = ({setter, sortfunc, reverse}) => {
-	const values = ['dateu','grade', 'name', 'wall']
+	const values = ['date','grade', 'name', 'wall', 'rating']
 	const [up, setUp] = useState(true);
 
 	const rev = () => {
@@ -31,6 +31,9 @@ export const Header = ({setter, sortfunc, reverse}) => {
 				</Menu.Item>
 				<Menu.Item>
 					Wall
+				</Menu.Item>
+				<Menu.Item>
+					Upvotes
 				</Menu.Item>
 		</Menu>
 		);

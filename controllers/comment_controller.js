@@ -3,7 +3,6 @@ const Comment = require('../models/Comment')
 
 exports.getComments = async(req,res) => {
 	try {
-		console.log('getting comments')
 		const comments = await Comment.find()
 		return res.status(200).json({
 			success: true,

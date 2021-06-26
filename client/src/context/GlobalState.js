@@ -152,7 +152,6 @@ export const GlobalProvider = ({children}) => {
 		try {
 			const loginRes = await axios.post('/api/login', {email, password});
 			const user = {token: loginRes.data.token, user: loginRes.data.data}
-			console.log(user)
 			localStorage.setItem('auth-token', loginRes.data.token);
 			dispatch({
 				type: 'LOGIN_USER',
@@ -177,7 +176,7 @@ export const GlobalProvider = ({children}) => {
 	}
 
 	async function check() {
-		console.log("checking for logged in user")
+		console.log("Checking for logged in user")
 		try {
 			let token = localStorage.getItem("auth-token");
 			if(token === null) {
@@ -189,7 +188,6 @@ export const GlobalProvider = ({children}) => {
 			if (tokenRes.data) {
 				const userRes = await axios.get('/api/profile', {headers: {'x-auth-token': token}});
 				const user = {token: token, user: userRes.data.data}
-				console.log(user);
 				dispatch({
 					type: 'LOGIN_USER',
 					payload: user
@@ -259,7 +257,6 @@ export const GlobalProvider = ({children}) => {
 
 	async function upvote(request) {
 		try {
-			console.log("from global state", request)
 			const config = {
 				headers: {
 					'Content-Type': 'application/json'

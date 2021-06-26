@@ -16,8 +16,8 @@ export default function Dashboard() {
 	const [routeDetail, setRouteDetail] = useState(null);
 	const [activeKey, setActiveKey] = useState("1");
 	const history = useHistory();
-	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"dateu")))
-	const [sortHist, setSortHist] = useState({field: "dateu", flip: false})
+	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"date")))
+	const [sortHist, setSortHist] = useState({field: "date", flip: false})
 
 	const {TabPane} = Tabs;
 	let name;
