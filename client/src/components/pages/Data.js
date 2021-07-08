@@ -5,7 +5,7 @@ import { GlobalContext } from '../../context/GlobalState'
 import {BreakdownGrade} from '../layout/BreakdownGrade'
 import {BreakdownSetter} from '../layout/BreakdownSetter'
 
-import {Button} from 'antd'
+import {Row, Col, Button} from 'antd'
 
 export default function Data() {
 	const {currUser, routes} = useContext(GlobalContext)
@@ -20,12 +20,20 @@ export default function Data() {
 				Total Routes on Wall: {routes.length}
 			</div>
 			
-			<div className = 'bar-graph'>
-				<BreakdownGrade/>
-			</div>
-			<div className = 'pie-chart'>
-				<BreakdownSetter/>
-			</div>
+			<Row style = {{paddingRight: 100, paddingLeft: 100}}>
+				<Col span = {12}>
+					<div className = 'bar-graph'>
+						<BreakdownGrade/>
+					</div>
+				</Col>
+				<Col span = {12}>
+					<div className = 'pie-chart'>
+						<BreakdownSetter/>
+					</div>
+				</Col>
+			</Row>
+			
+
 			<div align='center'>
 				<Button ghost = {true} onClick = {() => history.push('/dashboard')}>Back</Button>
 			</div>
