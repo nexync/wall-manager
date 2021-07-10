@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 
 import { Column } from '@ant-design/charts';
-export const BreakdownGrade = () => {
+export const BreakdownGrade = ({setter}) => {
 	const {routes} = useContext(GlobalContext)
+	const disproutes = setter === "all" ? routes : routes.filter(r => r.setter === setter);
 	const grades = ['5.5','5.6','5.7','5.8','5.9','5.10','5.11','5.12'];
 	const types = ["+","","-"];
 
@@ -17,13 +18,13 @@ export const BreakdownGrade = () => {
 				})
 		})
 	})
-	for (let ind in routes) {
-		if (routes[ind].grade === undefined) continue;
-		if (data[grades.indexOf(`5.${routes[ind].grade}`)*3 + types.indexOf(routes[ind].gradea)] === undefined)  continue;
-		data[grades.indexOf(`5.${routes[ind].grade}`)*3 + types.indexOf(routes[ind].gradea)] = {
-				year: `5.${routes[ind].grade}`,
-				type: routes[ind].gradea,
-				value: data[grades.indexOf(`5.${routes[ind].grade}`)*3 + types.indexOf(routes[ind].gradea)].value+1
+	for (let ind in disproutes) {
+		if (disproutes[ind].grade === undefined) continue;
+		if (data[grades.indexOf(`5.${disproutes[ind].grade}`)*3 + types.indexOf(disproutes[ind].gradea)] === undefined)  continue;
+		data[grades.indexOf(`5.${disproutes[ind].grade}`)*3 + types.indexOf(disproutes[ind].gradea)] = {
+				year: `5.${disproutes[ind].grade}`,
+				type: disproutes[ind].gradea,
+				value: data[grades.indexOf(`5.${disproutes[ind].grade}`)*3 + types.indexOf(disproutes[ind].gradea)].value+1
 		}
 	}
 	var config = {
@@ -42,9 +43,6 @@ export const BreakdownGrade = () => {
 		}
 	};
 	return (
-		<>
-			<div className = 'chart-label'>Breakdown by Grade</div>
-			<Column {...config} />
-		</>
+		<Column {...config} />
 	)
 }

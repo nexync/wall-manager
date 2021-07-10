@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Pie } from '@ant-design/charts';
 import { GlobalContext } from '../../context/GlobalState'
 
-export const BreakdownSetter = () => {
+export const BreakdownSetter = ({setSetter}) => {
 	const {routes} = useContext(GlobalContext);
 	var setters = {}
 	var data = []
@@ -38,26 +38,28 @@ export const BreakdownSetter = () => {
 				fontSize: 14,
 			},
 		},
-		interactions: [{ type: 'element-selected' }, { type: 'element-active' }],
+		// interactions: [
+		// 	{ type: 'element-selected' }, 
+		// 	{ type: 'element-active' }
+		// ],
 		statistic: {
-			title: false,
-			content: {
-				style: {
-					whiteSpace: 'pre-wrap',
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
-				},
-				formatter: function formatter() {
-					return '';
-				},
-			},
-		},
+      title: false,
+      content: {
+        style: {
+          whiteSpace: 'pre-wrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        },
+        content: 'AntV\nG2Plot',
+      },
+    },
 	};
 	return (
-		<>
-			<div className = 'chart-label'>Breakdown by Setter</div>
-			<Pie {...config} />
-		</>
+		<Pie {...config} onReady={(chart) => {
+			chart.on('element:click', (info) => {
+				setSetter(info.data.data.type);
+			});
+		}}/>
 	)
 }
 
