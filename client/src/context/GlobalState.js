@@ -129,6 +129,7 @@ export const GlobalProvider = ({children}) => {
 		try {
 			const {email, password} = newuser;
 			await axios.post('/api/register', newuser);
+			
 			const loginRes = await axios.post('/api/login', {email, password});
 			const user = {token: loginRes.data.token, user: loginRes.data.data}
 			localStorage.setItem('auth-token', loginRes.data.token);
