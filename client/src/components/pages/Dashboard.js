@@ -10,14 +10,16 @@ import { GlobalContext } from '../../context/GlobalState';
 import comparator from '../comp'
 
 import {Button, Row, Col, Tabs} from 'antd'
+import { set } from 'mongoose';
 
 export default function Dashboard() {
 	const {currUser, routes, upvote} = useContext(GlobalContext)
 	const [routeDetail, setRouteDetail] = useState(null);
 	const [activeKey, setActiveKey] = useState("1");
 	const history = useHistory();
-	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"date")))
-	const [sortHist, setSortHist] = useState({field: "date", flip: false})
+	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"date")));
+	const [sortHist, setSortHist] = useState({field: "date", flip: false});
+	let upvoteAllowed = true;
 
 	const {TabPane} = Tabs;
 	let name;
@@ -30,6 +32,7 @@ export default function Dashboard() {
 		else {
 			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,sortHist.field)).reverse());
 		}
+		// eslint-disable-next-line
 	}, [currUser])
 
 	if (currUser === null) {
@@ -50,15 +53,22 @@ export default function Dashboard() {
 
 	const upvoteWrapper = (routeid) => {
 		try {
-			const up = checkUpvoted(routeid)
-			const request = {
-				userid: currUser.user.id,
-				routeid: routeid,
-				up: up
+			console.log(upvoteAllowed)
+			if (upvoteAllowed) {
+				upvoteAllowed = false;
+				console.log(upvoteAllowed)
+				const up = checkUpvoted(routeid);
+				const request = {
+					userid: currUser.user.id,
+					routeid: routeid,
+					up: up
+				}
+				upvote(request);
+				console.log(upvoteAllowed);
+				setTimeout(() => {upvoteAllowed = true;}, 3000);
 			}
-			upvote(request);
 		} catch (err) {
-			
+			console.log(err)
 		}
 	}
 

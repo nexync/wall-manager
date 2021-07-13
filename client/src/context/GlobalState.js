@@ -129,14 +129,17 @@ export const GlobalProvider = ({children}) => {
 		try {
 			const {email, password} = newuser;
 			await axios.post('/api/register', newuser);
-			
+
 			const loginRes = await axios.post('/api/login', {email, password});
 			const user = {token: loginRes.data.token, user: loginRes.data.data}
 			localStorage.setItem('auth-token', loginRes.data.token);
 			console.log('User logged in and registered');
 			dispatch({
 				type: 'LOGIN_USER',
-				payload: user
+				payload: {
+					register: true,
+					user: user
+				}
 			})
 			return true;
 		} catch (err) {
@@ -155,7 +158,10 @@ export const GlobalProvider = ({children}) => {
 			localStorage.setItem('auth-token', loginRes.data.token);
 			dispatch({
 				type: 'LOGIN_USER',
-				payload: user
+				payload: {
+					register: false,
+					user: user
+				}
 			})
 			return true;
 		} catch (err) {
@@ -171,7 +177,10 @@ export const GlobalProvider = ({children}) => {
 		localStorage.setItem("auth-token", "");
 		dispatch({
 			type: 'LOGIN_USER',
-			payload: null
+			payload: {
+				register: false,
+				user: null
+			}
 		})
 	}
 
@@ -190,7 +199,10 @@ export const GlobalProvider = ({children}) => {
 				const user = {token: token, user: userRes.data.data}
 				dispatch({
 					type: 'LOGIN_USER',
-					payload: user
+					payload: {
+						register: false,
+						user: user
+					}
 				})
 				return true
 			}
@@ -213,6 +225,7 @@ export const GlobalProvider = ({children}) => {
 				payload: dispcomments
 			})
 		} catch (err) {
+			console.log(err)
 			dispatch({
 				type: 'ERROR',
 				payload: err.response.data				

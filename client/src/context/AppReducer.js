@@ -37,11 +37,21 @@ const AppReducer = (state,action) => {
 				...state,
 				users: action.payload
 			}
-		case 'LOGIN_USER':		
-			return {
-				...state,
-				currUser: action.payload,
-				error: null
+		case 'LOGIN_USER':
+			console.log(action.payload)
+			if (action.payload.register) {
+				state.users[action.payload.user.user.id] = {displayname: action.payload.user.user.displayname};
+				return {
+					...state,
+					currUser: action.payload.user,
+					users: state.users
+				}
+			}
+			else {
+				return {
+					...state,
+					currUser: action.payload.user,
+				}
 			}
 		case 'GET_COMMENTS':
 			return {
@@ -51,7 +61,7 @@ const AppReducer = (state,action) => {
 		case 'ADD_COMMENTS':
 			return {
 				...state,
-				comments: [...state.comments, action.payload]
+				comments: [...state.comments, action.payload],
 			}
 		case 'DELETE_COMMENTS':
 			return {

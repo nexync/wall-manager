@@ -1,4 +1,4 @@
-import React, {useContext, useEffect } from 'react';
+import React, {useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalState';
 import {Route} from './Route'
 
@@ -10,7 +10,7 @@ import {CaretUpOutlined} from '@ant-design/icons';
 
 
 export const RouteList = ({selectRoute, guest, setter, disproutes, upvoteWrapper, checkUpvoted}) => {
-	const {routes, currUser} = useContext(GlobalContext)
+	const {routes} = useContext(GlobalContext)
 
 	//MAKE MATCHING HERE MORE EFFICIENT
 	return (
