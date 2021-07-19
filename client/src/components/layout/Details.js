@@ -6,7 +6,7 @@ import {Button, Input, Row, Col } from 'antd'
 import { CloseOutlined, SendOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
-export const Details = ({guest, close, route}) => {
+export const Details = ({guest, close, route, commentLoad}) => {
 	const {currUser, getComments, addComment, deleteComment} = useContext(GlobalContext)
 	const [comment, setComment] = useState("");
 	const [anon, setAnon] = useState(false);
@@ -68,7 +68,7 @@ export const Details = ({guest, close, route}) => {
 				</Row>
 			</div>
 			<div>
-				<CommentList route_id = {route._id} del = {delComment}/>
+				<CommentList route_id = {route._id} del = {delComment} commentLoad = {commentLoad}/>
 			</div>
 			{guest !== true ? 
 				<div>

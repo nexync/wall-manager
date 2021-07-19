@@ -18,6 +18,8 @@ export default function Dashboard() {
 	const history = useHistory();
 	const [displayRoutes, setDisplayRoutes] = useState(routes.slice().sort((route1,route2)=>comparator(route1,route2,"date")));
 	const [sortHist, setSortHist] = useState({field: "date", flip: false});
+	const [loading, setLoading] = useState(false);
+
 	let upvoteAllowed = true;
 
 	const {TabPane} = Tabs;
@@ -93,6 +95,7 @@ export default function Dashboard() {
 			behavior: 'smooth'
 		})
 		setRouteDetail(route);
+		setLoading(true);
 		if (window.innerWidth <= 480) {
 			if (route != null)	setActiveKey("2");
 			else	setActiveKey("1")
@@ -133,7 +136,7 @@ export default function Dashboard() {
 						/>
 					</div>
 				</Col>
-				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/></Col>
+				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail} commentLoad = {{loading: loading, setLoading: setLoading}} /></Col>
 			</Row> :
 				<Tabs defaultActiveKey = "1" className = 'container' activeKey = {activeKey}>
 					<TabPane tab = "" key = "1">
@@ -145,7 +148,7 @@ export default function Dashboard() {
 						</div>
 					</TabPane>
 					<TabPane tab = "" key = "2">
-					<Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail}/>
+					<Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail} commentLoad = {{loading: loading, setLoading: setLoading}}/>
 					</TabPane>
 				</Tabs>
 			}
