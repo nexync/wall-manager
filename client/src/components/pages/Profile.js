@@ -11,6 +11,8 @@ export default function ProfilePage() {
 
 	const delUserWrapper = async () => {
 		console.log("Deleting User")
+
+
 		const delRes = await deleteUser(currUser);
 		console.log(delRes)
 		if (delRes) {

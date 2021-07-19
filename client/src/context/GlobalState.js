@@ -188,6 +188,7 @@ export const GlobalProvider = ({children}) => {
 		try {
 			localStorage.setItem("auth-token", "");
 			const deleteRes = await axios.delete(`/api/profile${user.user.id}`);
+
 			dispatch({
 				type: 'LOGIN_USER',
 				payload: {
