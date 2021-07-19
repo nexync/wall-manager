@@ -10,7 +10,6 @@ import { GlobalContext } from '../../context/GlobalState';
 import comparator from '../comp'
 
 import {Button, Row, Col, Tabs} from 'antd'
-import { set } from 'mongoose';
 
 export default function Dashboard() {
 	const {currUser, routes, upvote} = useContext(GlobalContext)

@@ -17,6 +17,10 @@ const commentSchema = mongoose.Schema({
 	createdAt: {
 		type: Date,
 		default: Date.now()
+	},
+	anon: {
+		type: Boolean,
+		default: false
 	}
 })
 

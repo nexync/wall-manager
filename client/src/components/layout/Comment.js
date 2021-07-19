@@ -11,7 +11,7 @@ export const Comment = ({comment, deleteComment}) => {
 	return (
 		<Row style = {currUser.user.displayname === users[comment.createdBy].displayname ? {padding: 15, backgroundColor: 'lightyellow'} : {padding: 15}}>
 			<Col span = {4}>
-				{users[comment.createdBy].displayname}
+				{comment.anon === true ? 'Anon.' : users[comment.createdBy].displayname}
 			</Col>
 			
 			{currUser.user.displayname === users[comment.createdBy].displayname ?

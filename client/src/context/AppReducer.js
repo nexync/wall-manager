@@ -38,8 +38,7 @@ const AppReducer = (state,action) => {
 				users: action.payload
 			}
 		case 'LOGIN_USER':
-			console.log(action.payload)
-			if (action.payload.register) {
+			if (action.payload.register === 1) { //First Registration
 				state.users[action.payload.user.user.id] = {displayname: action.payload.user.user.displayname};
 				return {
 					...state,
@@ -47,10 +46,18 @@ const AppReducer = (state,action) => {
 					users: state.users
 				}
 			}
-			else {
+			else if (action.payload.register === 0) { //Normal login/logout
 				return {
 					...state,
 					currUser: action.payload.user,
+				}
+			}
+			else { //User deleted
+				delete state.users[action.payload.user.user.id]
+				return {
+					...state,
+					currUser: null,
+					users: state.users
 				}
 			}
 		case 'GET_COMMENTS':

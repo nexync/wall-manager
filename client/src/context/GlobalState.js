@@ -137,7 +137,7 @@ export const GlobalProvider = ({children}) => {
 			dispatch({
 				type: 'LOGIN_USER',
 				payload: {
-					register: true,
+					register: 1,
 					user: user
 				}
 			})
@@ -159,7 +159,7 @@ export const GlobalProvider = ({children}) => {
 			dispatch({
 				type: 'LOGIN_USER',
 				payload: {
-					register: false,
+					register: 0,
 					user: user
 				}
 			})
@@ -178,10 +178,36 @@ export const GlobalProvider = ({children}) => {
 		dispatch({
 			type: 'LOGIN_USER',
 			payload: {
-				register: false,
+				register: 0,
 				user: null
 			}
 		})
+	}
+
+	async function deleteUser(user) {
+		try {
+			localStorage.setItem("auth-token", "");
+			const deleteRes = await axios.delete(`/api/profile${user.user.id}`);
+			dispatch({
+				type: 'LOGIN_USER',
+				payload: {
+					register: -1,
+					user: user
+				}
+			})
+			if (deleteRes.data.success) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (err) {
+			dispatch({
+				type: 'ERROR',
+				payload: err.response.data.error			
+			})
+			return false
+		}
 	}
 
 	async function check() {
@@ -200,7 +226,7 @@ export const GlobalProvider = ({children}) => {
 				dispatch({
 					type: 'LOGIN_USER',
 					payload: {
-						register: false,
+						register: 0,
 						user: user
 					}
 				})
@@ -228,7 +254,7 @@ export const GlobalProvider = ({children}) => {
 			console.log(err)
 			dispatch({
 				type: 'ERROR',
-				payload: err.response.data				
+				payload: err			
 			})
 		}
 	}
@@ -315,6 +341,7 @@ export const GlobalProvider = ({children}) => {
 			users: state.users,
 			getUsers,
 			upvote,
+			deleteUser,
 		}}>
 		{children}
 	</GlobalContext.Provider>);

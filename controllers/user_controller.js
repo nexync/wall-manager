@@ -112,7 +112,9 @@ exports.loginUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
 	try {
-		const deletedUser = await User.findByIdAndDelete(req.user);
+		console.log(req.params.id)
+		const deletedUser = await User.findById(req.params.id);
+		await deletedUser.remove();
 		return res.status(200).json({
 			success: true,
 			data: deletedUser

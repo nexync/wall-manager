@@ -28,9 +28,6 @@ router
 	.post(checkToken)
 
 router
-	.delete('/profile', auth, deleteUser)
-
-router
 	.get('/profile', auth, getUserInfo)
 
 router
@@ -44,6 +41,7 @@ router
 router
 	.route('/profile:id')
 	.put(upvote)
+	.delete(deleteUser)
 
 router
 	.route('/comments:id')

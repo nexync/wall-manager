@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react'
 
 import {CommentList} from './CommentList'
 
-import {Button, Input} from 'antd'
-import { CloseOutlined, SendOutlined } from '@ant-design/icons';
+import {Button, Input, Row, Col } from 'antd'
+import { CloseOutlined, SendOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
 export const Details = ({guest, close, route}) => {
 	const {currUser, getComments, addComment, deleteComment} = useContext(GlobalContext)
 	const [comment, setComment] = useState("");
+	const [anon, setAnon] = useState(false);
 	
 	const postComment = async (e) => {
 		e.preventDefault()
@@ -17,6 +18,7 @@ export const Details = ({guest, close, route}) => {
 				createdBy: currUser.user.id,
 				route: route._id,
 				text: comment,
+				anon: anon
 			}
 			await addComment(newComment)
 			await getComments(route._id)
@@ -46,7 +48,24 @@ export const Details = ({guest, close, route}) => {
 				
 			</div>
 			<div className = 'comment-label'>
-				Comments
+				<Row>
+					<Col span = {22}>
+						Comments
+					</Col>
+					<Col span = {2}>
+						<div align = 'right'>
+							<Button
+								size = 'small'
+								onClick = {() => {
+									setAnon(!anon);
+								}}
+								bordered = 'false'
+								icon={<EyeInvisibleOutlined/>}
+								style = {anon === true ? {color: 'aliceblue', backgroundColor: 'lightcoral'} : {color: 'aliceblue', backgroundColor: "#1890ff"}}
+							/>
+						</div>
+					</Col>
+				</Row>
 			</div>
 			<div>
 				<CommentList route_id = {route._id} del = {delComment}/>
@@ -67,7 +86,7 @@ export const Details = ({guest, close, route}) => {
 							icon={<SendOutlined/>}
 						/>
 					</form>
-				</div> : 
+				</div>: 
 				<div align = 'center' style = {{padding: 10}}>
 					Log in to leave a comment.
 				</div>
