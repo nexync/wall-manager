@@ -8,7 +8,6 @@ const initialState = {
 	users: {},
 	comments: [],
 	error: null,
-	loading: false,
 	currUser: null,
 }
 
@@ -324,7 +323,6 @@ export const GlobalProvider = ({children}) => {
 		{{
 			routes: state.routes,
 			error: state.error,
-			loading: state.loading,
 			currUser: state.currUser,
 			getRoutes,
 			addRoute,

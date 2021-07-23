@@ -45,8 +45,6 @@ export default function Data() {
 					</div>
 				</Col>
 			</Row>
-			
-
 			<div align='center'>
 				<Button ghost = {true} onClick = {() => history.push('/dashboard')}>Back</Button>
 			</div>

@@ -4,7 +4,6 @@ const AppReducer = (state,action) => {
 		case 'GET_ROUTES':
 			return {
 				...state,
-				loading: false,
 				routes: action.payload
 			}
 		case 'ADD_ROUTE':

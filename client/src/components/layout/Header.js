@@ -39,24 +39,22 @@ export const Header = ({setter, sortfunc, reverse}) => {
 		);
 
    return (
-		<>
-			{setter === true ? 
-				<Row>
-					<Col offfset = {2} span = {21}><label className = 'text'>Route List</label></Col>
-					<Col span = {1}><AddRoute/></Col>
-				</Row> :
-				<Row>
-					<Col offset = {2} span = { window.innerWidth > 480 ? 15 : 14}><label className = 'text'>Route List</label></Col>
-					<Col span = { window.innerWidth > 480 ? 4 : 6}>
-						<Dropdown overlay={menu} placement="bottomCenter">
-							<Button ghost = {true} block = {true}>Sort</Button>
-						</Dropdown>
-					</Col>
-					<Col offset = {1} span = { window.innerWidth > 480 ? 2 : 2}>
-						<Button ghost = {true} block = {true} icon = {up === false ? <DownOutlined/> : <UpOutlined/>} onClick = {rev}/>
-					</Col>
-				</Row>
-			}  
-		</>
+		setter === true ? 
+			<Row>
+				<Col offfset = {2} span = {21}><label className = 'text'>Route List</label></Col>
+				<Col offset = {2} span = {1}><AddRoute/></Col>
+			</Row> :
+			<Row>
+				<Col offset = {2} span = { window.innerWidth > 480 ? 15 : 14}><label className = 'text'>Route List</label></Col>
+				<Col span = { window.innerWidth > 480 ? 4 : 6}>
+					<Dropdown overlay={menu} placement="bottomCenter">
+						<Button ghost = {true} block = {true}>Sort</Button>
+					</Dropdown>
+				</Col>
+				<Col offset = {1} span = { window.innerWidth > 480 ? 2 : 2}>
+					<Button ghost = {true} block = {true} icon = {up === false ? <DownOutlined/> : <UpOutlined/>} onClick = {rev}/>
+				</Col>
+			</Row>
+			 
    )
 }

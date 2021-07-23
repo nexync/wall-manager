@@ -8,6 +8,7 @@ import Register from './components/pages/Register'
 import Dashboard from './components/pages/Dashboard'
 import Data from './components/pages/Data'
 import Profile from './components/pages/Profile'
+import UserData from './components/pages/UserData'
 
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
 					<Route exact path = '/dashboard' component = {Dashboard}/>
 					<Route exact path = '/data' component = {Data}/>
 					<Route exact path = '/profile' component = {Profile}/>
+					<Route exact path = '/userdata' component = {UserData}/>
 				</Switch>
 			</Router>
    </GlobalProvider>

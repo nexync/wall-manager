@@ -6,7 +6,7 @@ import {Row, Col} from 'antd'
 import {Button} from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
-export const Comment = ({comment, deleteComment}) => {
+export const Comment = ({admin, comment, deleteComment}) => {
 	const {currUser, users} = useContext(GlobalContext)
 
 	let dispName;
@@ -23,20 +23,26 @@ export const Comment = ({comment, deleteComment}) => {
 				{comment.anon === true ? 'Anon.' : dispName}
 			</Col>
 			
-			{currUser.user.displayname === dispName ?
+			{currUser.user.displayname === dispName || admin ? //Either user who made comment or admin can delete comment
 				<>
 					<Col span = {17} offset = {1}>
 						{comment.text}
 					</Col>
 					<Col span = {2}>
-						<Button onClick = {() => deleteComment(comment._id)} ghost = 'true' style = {{color: 'black'}} icon={<CloseOutlined/>} size = 'small' type = "default" />
+						<Button 
+							onClick = {() => deleteComment(comment._id)} 
+							ghost = 'true' 
+							style = {{color: 'black'}} 
+							icon={<CloseOutlined/>} 
+							size = 'small' 
+							type = "default"
+						/>
 					</Col>
 				</> : 
 				<Col span = {19} offset = {1}>
 					{comment.text}
 				</Col>
 			}
-			
 		</Row>
 	)
 }

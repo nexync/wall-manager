@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalState";
 
@@ -11,8 +11,6 @@ export default function ProfilePage() {
 
 	const delUserWrapper = async () => {
 		console.log("Deleting User")
-
-
 		const delRes = await deleteUser(currUser);
 		console.log(delRes)
 		if (delRes) {
@@ -21,6 +19,7 @@ export default function ProfilePage() {
 	}
   return (
 		<div className = 'profile-container'>
+			{name}
       <Form>
         <Form.Item>
           <Input placeholder = 'Display Name' type = 'text' onChange = {(e) => setName(e.target.value)}/>

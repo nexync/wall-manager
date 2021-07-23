@@ -6,7 +6,7 @@ import {Button, Input, Row, Col } from 'antd'
 import { CloseOutlined, SendOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { GlobalContext } from '../../context/GlobalState';
 
-export const Details = ({guest, close, route, commentLoad}) => {
+export const Details = ({guest, admin, close, route, commentLoad}) => {
 	const {currUser, getComments, addComment, deleteComment} = useContext(GlobalContext)
 	const [comment, setComment] = useState("");
 	const [anon, setAnon] = useState(false);
@@ -37,7 +37,15 @@ export const Details = ({guest, close, route, commentLoad}) => {
 	
 	return (
 		<div className = 'route-details'>
-			<div align = 'right'><Button onClick = {() => close(null)} size = "small" ghost = 'true' style = {{color: '#333333'}} icon = {<CloseOutlined/>}/></div>
+			<div align = 'right'>
+				<Button 
+					onClick = {() => close(null)} 
+					size = "small" 
+					ghost = 'true' 
+					style = {{color: '#333333'}} 
+					icon = {<CloseOutlined/>}
+				/>
+			</div>
 			<div className = 'title'>
 				<div>
 					{route.name}
@@ -56,9 +64,7 @@ export const Details = ({guest, close, route, commentLoad}) => {
 						<div align = 'right'>
 							<Button
 								size = 'small'
-								onClick = {() => {
-									setAnon(!anon);
-								}}
+								onClick = {() => { setAnon(!anon);}}
 								bordered = 'false'
 								icon={<EyeInvisibleOutlined/>}
 								style = {anon === true ? {color: 'aliceblue', backgroundColor: 'lightcoral'} : {color: 'aliceblue', backgroundColor: "#1890ff"}}
@@ -68,9 +74,14 @@ export const Details = ({guest, close, route, commentLoad}) => {
 				</Row>
 			</div>
 			<div>
-				<CommentList route_id = {route._id} del = {delComment} commentLoad = {commentLoad}/>
+				<CommentList 
+					admin = {admin}
+					route_id = {route._id} 
+					del = {delComment} 
+					commentLoad = {commentLoad}
+				/>
 			</div>
-			{guest !== true ? 
+			{admin !== true && guest !== true ? 
 				<div>
 					<form onSubmit = {(e) => postComment(e)}>
 						<Input 
@@ -91,7 +102,6 @@ export const Details = ({guest, close, route, commentLoad}) => {
 					Log in to leave a comment.
 				</div>
 			}
-			
 		</div>
 	)
 }

@@ -25,7 +25,6 @@ export default function Dashboard() {
 	const {TabPane} = Tabs;
 	let name;
 
-
 	useEffect(() => {
 		if (!sortHist.flip) {
 			setDisplayRoutes(routes.slice().sort((route1,route2)=>comparator(route1,route2,sortHist.field)));
@@ -65,7 +64,6 @@ export default function Dashboard() {
 					up: up
 				}
 				upvote(request);
-				console.log(upvoteAllowed);
 				setTimeout(() => {upvoteAllowed = true;}, 3000);
 			}
 		} catch (err) {
@@ -108,11 +106,11 @@ export default function Dashboard() {
 				<div style = {{width: 100, fontSize: 16, padding: 10}}>Hello {name}</div>
 				<div align = 'right' style = {{width: 300, padding: 10}}>
 						<Row>
-							<Col span = {8}>
-								{name === 'Setter' ? <Button ghost = 'true' onClick = {() => history.push('/data')}>Route Data</Button> : null}
-							</Col>
-							<Col span = {8}>
-								{name !== 'Setter' && name !== 'Guest' ?  <Button ghost = 'true' onClick = {() => history.push('/profile')}>Profile</Button> : null}
+							<Col offset = {8} span = {8}>
+								{name === 'Setter' ? <Button ghost = 'true' onClick = {() => history.push('/data')}>Route Data</Button> : 	//Setter Route Management
+									name === 'Admin' ? <Button ghost = 'true' onClick = {() => history.push('/')}> User Management</Button> : //Admin Profile Management
+										name !== 'Guest' ? <Button ghost = 'true' onClick = {() => history.push('/profile')}>Profile</Button> : //No button for Guest
+											null}
 							</Col>
 							<Col span = {8}>
 								<Logout/>
@@ -120,7 +118,8 @@ export default function Dashboard() {
 						</Row>
 				</div>		
 			</div>
-			{window.innerWidth > 480 ? <Row className = 'container'>
+			{window.innerWidth > 480 ?  //Mobile vs Computer split
+			<Row className = 'container'>  
 				<Col offset = {2} span = {8}>
 					<div className = 'header'> 
 						<Header setter = {name === 'Setter'} sortfunc = {sortfunc} reverse = {reversesort}/>
@@ -136,21 +135,39 @@ export default function Dashboard() {
 						/>
 					</div>
 				</Col>
-				<Col offset = {4} span = {8}><Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail} commentLoad = {{loading: loading, setLoading: setLoading}} /></Col>
+				<Col offset = {4} span = {8}>
+					<Details 
+						guest = {name === 'Guest'} 
+						admin = {name === 'Admin'}
+						close = {setDetail} 
+						route = {routeDetail} 
+						commentLoad = {{loading: loading, setLoading: setLoading}} />
+				</Col>
 			</Row> :
-				<Tabs defaultActiveKey = "1" className = 'container' activeKey = {activeKey}>
-					<TabPane tab = "" key = "1">
-						<div className = 'header'> 
-							<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
-						</div>
-						<div >
-							<RouteList selectRoute = {setDetail} setter = {name === 'Setter'} disproutes = {displayRoutes} upvoteWrapper = {upvoteWrapper} checkUpvoted = {checkUpvoted}/>
-						</div>
-					</TabPane>
-					<TabPane tab = "" key = "2">
-					<Details guest = {name === 'Guest'} close = {setDetail} route = {routeDetail} commentLoad = {{loading: loading, setLoading: setLoading}}/>
-					</TabPane>
-				</Tabs>
+			<Tabs defaultActiveKey = "1" className = 'container' activeKey = {activeKey}>
+				<TabPane tab = "" key = "1">
+					<div className = 'header'> 
+						<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
+					</div>
+					<div >
+						<RouteList 
+							selectRoute = {setDetail} 
+							setter = {name === 'Setter'} 
+							disproutes = {displayRoutes} 
+							upvoteWrapper = {upvoteWrapper} 
+							checkUpvoted = {checkUpvoted}
+						/>
+					</div>
+				</TabPane>
+				<TabPane tab = "" key = "2">
+					<Details 
+						guest = {name === 'Guest'} 
+						admin = {name === 'Admin'}
+						close = {setDetail} 
+						route = {routeDetail} 
+						commentLoad = {{loading: loading, setLoading: setLoading}}/>
+				</TabPane>
+			</Tabs>
 			}
 		</div>
 	)
