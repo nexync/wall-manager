@@ -122,7 +122,11 @@ export default function Dashboard() {
 			<Row className = 'container'>  
 				<Col offset = {2} span = {8}>
 					<div className = 'header'> 
-						<Header setter = {name === 'Setter'} sortfunc = {sortfunc} reverse = {reversesort}/>
+						<Header 
+							setter = {name === 'Setter'} 
+							sortfunc = {sortfunc} 
+							reverse = {reversesort}
+						/>
 					</div>
 					<div >
 						<RouteList 
@@ -147,7 +151,11 @@ export default function Dashboard() {
 			<Tabs defaultActiveKey = "1" className = 'container' activeKey = {activeKey}>
 				<TabPane tab = "" key = "1">
 					<div className = 'header'> 
-						<Header setter = {name === 'Setter'} sortfunc = {sortfunc}/>
+						<Header 
+							setter = {name === 'Setter'} 
+							sortfunc = {sortfunc} 
+							reverse = {reversesort}
+						/>
 					</div>
 					<div >
 						<RouteList 
