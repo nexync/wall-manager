@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
 	},
 	displayname: {
 		type: String,
+		unique: true
 	},
 	upvoted: {
 		type: Array,

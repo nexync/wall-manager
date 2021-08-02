@@ -7,6 +7,7 @@ import {Button} from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 export const Comment = ({admin, comment, deleteComment}) => {
+
 	const {currUser, users} = useContext(GlobalContext)
 
 	let dispName;

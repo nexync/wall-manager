@@ -27,15 +27,23 @@ exports.addUser = async (req,res) => {
 			})
 		}
 
-		let existingUser = await User.findOne({email: email});
+		let existing = await User.findOne({displayname: displayname});
+		if (existingUser) {
+			return res.status(400).json({
+				success: false,
+				error: "A user with this name already exists."
+			})
+		}
+
+		existingUser = await User.findOne({email: email});
 		if(existingUser) {
 			return res.status(400).json({
 				success: false,
-				error: "An user with this email already exists."
+				error: "A user with this email already exists."
 			}) 
 		}
 
-		if(displayname === "Setter" || displayname === 'Guest') {
+		if(displayname === "Setter" || displayname === 'Guest' || displayname === 'Admin') {
 			return res.status(400).json({
 				success: false,
 				error: "Invalid Name."

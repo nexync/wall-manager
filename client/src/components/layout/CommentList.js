@@ -4,7 +4,7 @@ import {Comment} from './Comment'
 import { GlobalContext } from '../../context/GlobalState';
 
 import {List} from 'antd'
-export const CommentList = ({admin, route_id, delComment, commentLoad}) => {
+export const CommentList = ({admin, route_id, del, commentLoad}) => {
 	const {comments, getComments} = useContext(GlobalContext)
 	useEffect(() => {
 		const asyncwrapper = async () => {
@@ -28,10 +28,10 @@ export const CommentList = ({admin, route_id, delComment, commentLoad}) => {
 					renderItem = {comment => (
 						<List.Item style = {{marginBottom: 0}}>
 							<Comment 
-								admin = {admin} 
 								key = {comment._id} 
+								admin = {admin} 
 								comment={comment} 
-								deleteComment = {delComment} 
+								deleteComment = {del} 
 							/>
 						</List.Item> 
 					)}
