@@ -27,7 +27,7 @@ export default function UserData() {
 				userdata.push({
 					displayname: users[user].displayname,
 					id: user
-				})
+				});
 			}
 		}
 	}, [users])
