@@ -27,7 +27,7 @@ exports.addUser = async (req,res) => {
 			})
 		}
 
-		let existing = await User.findOne({displayname: displayname});
+		let existingUser = await User.findOne({displayname: displayname});
 		if (existingUser) {
 			return res.status(400).json({
 				success: false,

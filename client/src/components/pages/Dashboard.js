@@ -108,7 +108,7 @@ export default function Dashboard() {
 						<Row>
 							<Col offset = {8} span = {8}>
 								{name === 'Setter' ? <Button ghost = 'true' onClick = {() => history.push('/data')}>Route Data</Button> : 	//Setter Route Management
-									name === 'Admin' ? <Button ghost = 'true' onClick = {() => history.push('/')}> User Data</Button> : //Admin Profile Management
+									name === 'Admin' ? <Button ghost = 'true' onClick = {() => history.push('/userdata')}> User Data</Button> : //Admin Profile Management
 										name !== 'Guest' ? <Button ghost = 'true' onClick = {() => history.push('/profile')}>Profile</Button> : //No button for Guest
 											null}
 							</Col>

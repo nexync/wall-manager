@@ -11,7 +11,7 @@ export default function ProfilePage() {
 
 	const delUserWrapper = async () => {
 		console.log("Deleting User")
-		const delRes = await deleteUser(currUser);
+		const delRes = await deleteUser(currUser, false);
 		console.log(delRes)
 		if (delRes) {
 			history.push('/');

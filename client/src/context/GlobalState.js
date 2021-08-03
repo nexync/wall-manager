@@ -183,24 +183,43 @@ export const GlobalProvider = ({children}) => {
 		})
 	}
 
-	async function deleteUser(user) {
+	async function deleteUser(user, admin) {
 		try {
-			localStorage.setItem("auth-token", "");
-			const deleteRes = await axios.delete(`/api/profile${user.user.id}`);
-
-			dispatch({
-				type: 'LOGIN_USER',
-				payload: {
-					register: -1,
-					user: user
+			if (admin) {
+				const deleteRes = await axios.delete(`/api/profile${user.id}`);
+				dispatch({
+					type: 'LOGIN_USER',
+					payload: {
+						register: -2,
+						user: user
+					}
+				})
+				if (deleteRes.data.success) {
+					return true;
 				}
-			})
-			if (deleteRes.data.success) {
-				return true;
+				else {
+					return false;
+				}
 			}
 			else {
-				return false;
+				localStorage.setItem("auth-token", "");
+				const deleteRes = await axios.delete(`/api/profile${user.user.id}`);
+
+				dispatch({
+					type: 'LOGIN_USER',
+					payload: {
+						register: -1,
+						user: user
+					}
+				})
+				if (deleteRes.data.success) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
+			
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',

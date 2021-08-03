@@ -51,11 +51,18 @@ const AppReducer = (state,action) => {
 					currUser: action.payload.user,
 				}
 			}
-			else { //User deleted
+			else if (action.payload.register === -1) { //User deleted from profile
 				delete state.users[action.payload.user.user.id]
 				return {
 					...state,
 					currUser: null,
+					users: state.users
+				}
+			}
+			else { //User deleted from admin
+				delete state.users[action.payload.user.id]
+				return {
+					...state,
 					users: state.users
 				}
 			}
