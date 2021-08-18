@@ -157,9 +157,10 @@ export default function Dashboard() {
 							reverse = {reversesort}
 						/>
 					</div>
-					<div >
+					<div>
 						<RouteList 
 							selectRoute = {setDetail} 
+							guest = {name === 'Guest'} 
 							setter = {name === 'Setter'} 
 							disproutes = {displayRoutes} 
 							upvoteWrapper = {upvoteWrapper} 

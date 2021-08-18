@@ -10,12 +10,27 @@ export const Comment = ({admin, comment, deleteComment}) => {
 
 	const {currUser, users} = useContext(GlobalContext)
 
+
+	function nameOverflow(name) {
+		var t = Math.ceil(name.length/8)
+		var ret = "";
+		for (let i = 0; i<t; i++) {
+			if (i === 0) {
+				ret = name.slice(i*8, (i+1)*8)
+			}
+			else {
+				ret = ret + "- " + name.slice(i*8, (i+1)*8)
+			}
+		}
+		return ret;
+	}
+
 	let dispName;
 	if (!users[comment.createdBy]) {
 		dispName = '[Deleted]'
 	}
 	else {
-		dispName = users[comment.createdBy].displayname;
+		dispName = nameOverflow(users[comment.createdBy].displayname);
 	}
 
 	return (
