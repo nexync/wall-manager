@@ -74,6 +74,17 @@ export const Route = ({route, selectRoute}) => {
 
 	name = editable ? <RouteTag id={route._id} field = {"name"}/>  : name
 	setter = editable ? <RouteTag id={route._id} field = {"setter"}/> : setter
+	if (route.grade >= 10) {
+		if (gradea === '+') {
+			gradea = "c/d"
+		}
+		else if (gradea === '') {
+			gradea = "b/c"
+		}
+		else {
+			gradea = "a/b"
+		}
+	}
 	grade = editable ? <Row><Col span = {18}><RouteTag id={route._id} field = {"grade"}/></Col><Col span = {6}> <GradeAdjust id = {route._id}/> </Col></Row>  : <>{grade}{gradea}</>
 	wall = editable ? <RouteTag id={route._id} field = {"wall"}/> : wall
 	let date = editable ? <RouteTag id={route._id} field = {"date"}/> : route.date
