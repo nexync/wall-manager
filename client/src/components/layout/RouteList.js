@@ -26,7 +26,7 @@ export const RouteList = ({selectRoute, guest, setter, disproutes, upvoteWrapper
 						(guest === true ? 
 							<Row>
 								<Col span = {2} style = {{color: 'aliceblue'}}>
-									<div>
+									<div align = 'center'>
 										<Button style = {{border: 'none', backgroundColor: '#333333', color: 'aliceblue'}} icon = {<CaretUpOutlined/>}/>
 									</div>
 									<div align = 'center' style = {{fontSize: 20}}>
@@ -41,7 +41,7 @@ export const RouteList = ({selectRoute, guest, setter, disproutes, upvoteWrapper
 							<Row>
 								{checkUpvoted(route._id) ?  
 								<Col span = {2} style = {{color: 'orange'}}>
-									<div>
+									<div align = 'center'>
 										<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'orange'}} icon = {<CaretUpOutlined/>}/>
 									</div>
 									<div align = 'center' style = {{fontSize: 20}}>
@@ -50,7 +50,7 @@ export const RouteList = ({selectRoute, guest, setter, disproutes, upvoteWrapper
 								</Col>  :
 									
 								<Col span = {2} style = {{color: 'aliceblue'}}>
-									<div>
+									<div align = 'center'>
 										<Button onClick = {() => upvoteWrapper(route._id)} style = {{border: 'none', backgroundColor: '#333333', color: 'aliceblue'}} icon = {<CaretUpOutlined/>}/>
 									</div>
 									<div align = 'center' style = {{fontSize: 20}}>
