@@ -11,15 +11,15 @@ export const Comment = ({admin, comment, deleteComment}) => {
 	const {currUser, users} = useContext(GlobalContext)
 
 
-	function nameOverflow(name) {
-		var t = Math.ceil(name.length/8)
+	function nameOverflow(name, maxlen) {
+		var t = Math.ceil(name.length/maxlen)
 		var ret = "";
 		for (let i = 0; i<t; i++) {
 			if (i === 0) {
-				ret = name.slice(i*8, (i+1)*8)
+				ret = name.slice(i*maxlen, (i+1)*maxlen)
 			}
 			else {
-				ret = ret + "- " + name.slice(i*8, (i+1)*8)
+				ret = ret + "- " + name.slice(i*maxlen, (i+1)*maxlen)
 			}
 		}
 		return ret;
@@ -30,7 +30,15 @@ export const Comment = ({admin, comment, deleteComment}) => {
 		dispName = '[Deleted]'
 	}
 	else {
-		dispName = nameOverflow(users[comment.createdBy].displayname);
+		if (window.innerWidth > 1100) {
+			dispName = nameOverflow(users[comment.createdBy].displayname, 8);
+		}
+		else if (window.innerWith > 480) {
+			dispName = nameOverflow(users[comment.createdBy].displayname, 18);
+		}
+		else {
+			dispName = nameOverflow(users[comment.createdBy].displayname, 10);
+		}
 	}
 
 	return (
