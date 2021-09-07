@@ -94,7 +94,7 @@ export default function Dashboard() {
 		})
 		setRouteDetail(route);
 		setLoading(true);
-		if (window.innerWidth <= 480) {
+		if (window.innerWidth <= 1100) {
 			if (route != null)	setActiveKey("2");
 			else	setActiveKey("1")
 		}
@@ -118,7 +118,7 @@ export default function Dashboard() {
 						</Row>
 				</div>		
 			</div>
-			{window.innerWidth > 480 ?  //Mobile vs Computer split
+			{window.innerWidth > 1100 ?  //Mobile vs Computer split
 			<Row className = 'container'>  
 				<Col offset = {2} span = {8}>
 					<div className = 'header'> 

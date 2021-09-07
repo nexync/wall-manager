@@ -17,12 +17,12 @@ export const Route = ({route, selectRoute}) => {
 			title = {"Confirm Route Deletion"}
 			hoverable 
 			bodyStyle = {{padding: "2px", fontSize: "14px", textAlign: "center"}}
-			headStyle = {window.innerWidth <= 480 ? {fontSize: "16px", textAlign: "center"} : {fontSize: "18px", textAlign: "center"}} 
+			headStyle = {window.innerWidth <= 1100 ? {fontSize: "16px", textAlign: "center"} : {fontSize: "18px", textAlign: "center"}} 
 			style = {{width: '100%', backgroundColor: 'aliceblue', color: '#333333'}}
 		>
 			<Row align = {"middle"}>
-				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => deleteRoute(route._id)}>Yes, erase it forever.</Button></Col>
-				<Col span={12}><Button fontSize = {window.innerWidth <= 480 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => editRouteState(route, route._id, "delete")}>Noooooo</Button></Col>
+				<Col span={12}><Button fontSize = {window.innerWidth <= 1100 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => deleteRoute(route._id)}>Yes, erase it forever.</Button></Col>
+				<Col span={12}><Button fontSize = {window.innerWidth <= 1100 ? "12px" : "14px"} size = "small" block = "true" ghost = "true" style = {{color: "#000000"}} onClick = {() => editRouteState(route, route._id, "delete")}>Noooooo</Button></Col>
 			</Row>
 	</Card>
 		)
@@ -98,8 +98,8 @@ export const Route = ({route, selectRoute}) => {
 					<Col style = {{fontSize: "14px", textAlign: "right"}} span = {6}>{grade}</Col> 
 			</Row>} 
 			hoverable 
-			bodyStyle = {window.innerWidth <= 480 ? {padding: "2px", fontSize: "12px", textAlign: "center"}: {padding: "2px", fontSize: "14px", textAlign: "center"}} 
-			headStyle = {window.innerWidth <= 480 ? {fontSize: "16px",borderRight: `3px solid ${color}` } : {fontSize: "18px",borderRight: `5px solid ${color}` }} 
+			bodyStyle = {window.innerWidth <= 1100 ? {padding: "2px", fontSize: "12px", textAlign: "center"}: {padding: "2px", fontSize: "14px", textAlign: "center"}} 
+			headStyle = {window.innerWidth <= 1100 ? {fontSize: "16px",borderRight: `3px solid ${color}` } : {fontSize: "18px",borderRight: `5px solid ${color}` }} 
 			style = {{width: '100%', backgroundColor: 'aliceblue', color: '#333333'}}
 			onClick = {() => {
 				try {

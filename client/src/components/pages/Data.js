@@ -27,6 +27,8 @@ export default function Data() {
 				</Button>
 			</div>
 			
+
+			{window.innerWidth > 1100 ? 
 			<Row style = {{paddingRight: 100, paddingLeft: 100}}>
 				<Col span = {12}>
 					<div className = 'chart-label'>
@@ -44,7 +46,23 @@ export default function Data() {
 						<BreakdownSetter setSetter = {setSetter}/>
 					</div>
 				</Col>
-			</Row>
+			</Row> : 
+				<>
+					<div className = 'chart-label'>
+					Breakdown by Grade
+					</div>
+					<div className = 'bar-graph'>
+						<BreakdownGrade setter = {setter}/>
+					</div>
+					<div className = 'chart-label'>
+						Breakdown by Setter
+					</div>
+					<div className = 'pie-chart'>
+						<BreakdownSetter setSetter = {setSetter}/>
+					</div>
+				</>
+			}
+
 			<div align='center'>
 				<Button ghost = {true} onClick = {() => history.push('/dashboard')}>Back</Button>
 			</div>
