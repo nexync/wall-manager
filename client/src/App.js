@@ -10,14 +10,16 @@ import Data from './components/pages/Data'
 import Profile from './components/pages/Profile'
 import UserData from './components/pages/UserData'
 
+
 import './App.css';
 
 
 function App() {
    return ( 
-   <GlobalProvider>
-      <Router>
-				<Switch>
+		<Router>
+			<Switch>
+				<GlobalProvider>
+
 					<Route exact path = '/' component = {Home}/>
 					<Route exact path = '/login' component = {Login}/>
 					<Route exact path = '/register' component = {Register}/>
@@ -25,9 +27,10 @@ function App() {
 					<Route exact path = '/data' component = {Data}/>
 					<Route exact path = '/profile' component = {Profile}/>
 					<Route exact path = '/userdata' component = {UserData}/>
-				</Switch>
-			</Router>
-   </GlobalProvider>
+				</GlobalProvider>
+
+			</Switch>
+		</Router>
    );
 }
 export default App;

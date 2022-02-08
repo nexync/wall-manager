@@ -75,8 +75,8 @@ exports.addUser = async (req,res) => {
 
 exports.loginUser = async (req, res) => {
 	try {
-		const {email, password} = req.body;
-
+		const {email, password, comp_login} = req.body;
+		
 		if (!email || !password) {
 			return res.status(400).json({
 				success: false,
@@ -84,32 +84,64 @@ exports.loginUser = async (req, res) => {
 			})
 		}
 
-		const user = await User.findOne({email: email });
-		if(!user) {
-			return res.status(400).json({
-				success: false,
-				error: "User not found."
-			})
-		}
-		
-		const isMatch = await bcrypt.compare(password, user.password)
-		if(!isMatch) {
-			return res.status(400).json({
-				success: false,
-				error: "Wrong password"
+		if (!comp_login) { //Normal user login
+			const user = await User.findOne({email: email });
+			if(!user) {
+				return res.status(400).json({
+					success: false,
+					error: "User not found."
+				})
+			}
+			
+			const isMatch = await bcrypt.compare(password, user.password)
+			if(!isMatch) {
+				return res.status(400).json({
+					success: false,
+					error: "Wrong password"
+				})
+			}
+
+			const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+			return res.status(200).json({
+				success: true,
+				token,
+				data: {
+					id: user._id,
+					displayname: user.displayname,
+					upvoted: user.upvoted
+				}
 			})
 		}
 
-		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-		return res.status(200).json({
-			success: true,
-			token,
-			data: {
-				id: user._id,
-				displayname: user.displayname,
-				upvoted: user.upvoted
+		else {
+			const competitor = await Competitor.findOne({name: email}); // this is dumb but i don't want to switch the name 
+			if(!competitor) {
+				return res.status(400).json({
+					success: false,
+					error: "Competitor not registered"
+				})
 			}
-		})
+
+			if(password != competitor.netid) {
+				return res.status(400).json({
+					success: false,
+					error: "netid not correct"
+				})
+			}
+
+			const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+			return res.status(200).json({
+				success: true,
+				token,
+				data: {
+					id: user._id,
+					name: user.name
+				}
+			})
+
+		}
+		
+		
 	} catch (err) {
 		return res.status(500).json({
 			success: false,

@@ -150,19 +150,34 @@ export const GlobalProvider = ({children}) => {
 		}
 	}
 
-	async function login({email, password}) {
+	async function login({email, password, comp_login}) {
 		try {
-			const loginRes = await axios.post('/api/login', {email, password});
-			const user = {token: loginRes.data.token, user: loginRes.data.data}
-			localStorage.setItem('auth-token', loginRes.data.token);
-			dispatch({
-				type: 'LOGIN_USER',
-				payload: {
-					register: 0,
-					user: user
-				}
-			})
-			return true;
+			const loginRes = await axios.post('/api/login', {email, password, comp_login});
+
+			if (!comp_login) {
+				const user = {token: loginRes.data.token, user: loginRes.data.data}
+				localStorage.setItem('auth-token', loginRes.data.token);
+				dispatch({
+					type: 'LOGIN_USER',
+					payload: {
+						register: 0,
+						user: user
+					}
+				})
+				return true;
+			}
+
+			else {
+				const competitor = loginRes.data.data
+				dispatch({
+					type: 'COMP_LOGIN',
+					payload: {
+						competitor: competitor
+					}
+				})
+				return true;
+			}
+			
 		} catch (err) {
 			dispatch({
 				type: 'ERROR',

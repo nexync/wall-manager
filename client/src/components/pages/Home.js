@@ -41,7 +41,6 @@ export default function Home() {
 			<div className = 'button-container'>
 				<Button block = {true} ghost = {true} shape = {"round"} size = {"large"} onClick = {handleClick}>Guest</Button>
 			</div>
-			<p>Please don't sue me Duke</p>
 		</div>
 	)
 }

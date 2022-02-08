@@ -14,7 +14,7 @@ export default function Login() {
 
 	const handleSubmit = async () => {
 		try {
-			const loginres = await login({email, password})
+			const loginres = await login({email, password, comp_login: false})
 			if (loginres)
 				history.push('/dashboard')
 		} catch (err) {

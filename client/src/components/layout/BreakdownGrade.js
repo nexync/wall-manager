@@ -5,7 +5,7 @@ import { Column } from '@ant-design/charts';
 export const BreakdownGrade = ({setter}) => {
 	const {routes} = useContext(GlobalContext)
 	const disproutes = setter === "all" ? routes : routes.filter(r => r.setter === setter);
-	const grades = ['5.5','5.6','5.7','5.8','5.9','5.10','5.11','5.12'];
+	const grades = ['5.5','5.6','5.7','5.8','5.9','5.10','5.11','5.12','5.13'];
 	const types = ["+","","-"];
 
 	let data = []
