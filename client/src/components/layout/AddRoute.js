@@ -10,7 +10,7 @@ export const AddRoute = () => {
    const handleClick = () => {
       const newRoute = {
          id: Math.floor(Math.random() * 100000000),
-         date: new Date().getMonth()+1 + '/' + new Date().getDate(),
+         date: new Date().getMonth()+1 + '/' + new Date().getDate() + '/' + new String(new Date().getFullYear()).substring(2,4),
 				 gradea: "",
 				 color: "",
       }
